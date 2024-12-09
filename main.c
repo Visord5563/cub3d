@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:37 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/09 07:05:06 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/09 07:05:51 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 			if (status == 2)
 			{
 				if (counter != 6 || !is_texture_valid(p_map))
-					return (printf("*Error\n"), free(line), free_map(p_map), 1);
+					return (printf("Error\n"), free(line), free_map(p_map), 1);
 				map_oned = ft_strjoin(map_oned, line);
 				if (!map_oned)
 					return (printf("Error\n"), free(line), free_map(p_map), 1);
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
 				continue;
 			}
 			else if (status == 0)
-				return (printf("*=Error\n"), free(line), free_map(p_map), 1);
+				return (printf("Error\n"), free(line), free_map(p_map), 1);
 		}
 		counter++;
 		free(line);
