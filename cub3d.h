@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/08 21:02:00 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/12/09 03:17:04 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,22 @@ char	*ft_strdup(const char *s1);
 int		ft_strchr2( char *s);
 // char	**ft_split(char *s, char c);
 // char	*ft_substr(char *s, unsigned int start, size_t len);
+
+
+// part parsing
+
+char	**my_split(char const *s, char *c);
+int		ft_strcmp(const char *s1, const char *s2);
+void	ft_free(char **str);
+int		parsing_color(char *line, t_map *map);
+int		parsing_texture(char *line, t_map *map, int counter);
+int		ft_count(char **str);
+int		is_texture_valid(t_map *map);
+int		skip_line_empty(char *line);
+char	*skip_space(char *line);
+void	init_map(t_map **p_map);
+void	free_map(t_map *map);
+int		parse_map(t_map *p_map, char **map);
+int		check_namnf(t_map *p_map, char *av);
+
+

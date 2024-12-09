@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:20:06 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/08 21:01:44 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/12/09 02:14:13 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
 
 char *get_r(char **s, int j)
 {
@@ -60,5 +58,4 @@ char *get_next_line(int fd)
     return (free(buff),free(string), string = NULL, NULL);
 }
 
-
-        
+   

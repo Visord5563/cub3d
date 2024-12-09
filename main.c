@@ -3,126 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:37 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/08 23:53:12 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/12/09 04:12:35 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int check_namnf(t_map *p_map, char *av)
+void f()
 {
-    if(ft_strlen(ft_strchr(av, '.')) == 4 && !ft_strcmp(strchr(av, '.'), ".cub"))
-    {
-		p_map->fd = open(av  , O_RDONLY);
-		if (p_map->fd == -1) 
-		{
-	        printf("Error Number % d\n", errno);
-        	perror("Program");
-			free(p_map);
-			exit(1);
-    	}
-		return 1;
-    }
-	return 0;
+	system("leaks a.out");
 }
 
-int ft_count(char **str)
-{
-	int i;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void check_w(char *map)
+int main(int argc, char **argv)
 {
-	int j;
-	j = 0;
-	while(map[j])
-	{
-		if (map[j] != '1' && map[j] != ' ')
-		{
-			printf("error\n");
-			exit(1);
-		}
-		j++;
-	}
-}
+	t_map	*p_map;
+	int		status;
+	int		i;
+	int		counter;
+	char	*line;
+	char	*map_oned;
+	char	**map;
+	int		is_map;
 
-int parse_map(t_map *p_map, char **map)
-{
-	int i = 0;
-	int j = 0;
-	int c ;
-	char *check;
-	check_w(map[0]);
 	i = 1;
-	c = ft_count(map);
-	int cou = 0;
-	while(map[i] && i < c - 1)
+	counter = 0;
+	map_oned = NULL;
+	map = NULL;
+	is_map = 0;
+	init_map(&p_map);
+    if (argc != 2 || !check_namnf(p_map, argv[1]))
+        return (free_map(p_map), 1);
+	// atexit(f);
+	while ((line = get_next_line(p_map->fd)))
 	{
-		j = 0;
-		while(map[i][j] == ' ')
-			j++;
-		
-		check = ft_strtrim(map[i], " \t\v\f\r\n");
-		if (check[0] != '1' || check[ft_strlen(check) - 1] != '1')
+		if (skip_line_empty(line) && !is_map)
+			continue;
+		status = parsing_color(line, p_map);
+		if (status == 0)
+			return (printf("Error\n"), free(line), free_map(p_map), 1);
+		else if (status == 2)
 		{
-			printf("error\n");
-			exit(1);
-		}
-		while(map[i][j])
-		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
+			status = parsing_texture(line, p_map, counter);
+			if (status == 2)
 			{
-				cou++;
-				if (map[i][j + 1] == ' ' || map[i][j - 1] == ' ' || map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || j >= (int)ft_strlen(map[i - 1]) || j >= (int)ft_strlen(map[i + 1]))
-				{
-					printf("error\n");
-					exit(1);
-				}
+				if (counter != 6 || !is_texture_valid(p_map))
+					return (printf("Error\n"), free(line),free_map(p_map), 1);
+				map_oned = ft_strjoin(map_oned, line);
+				if (!map_oned)
+					return (printf("Error\n"), free(line), free_map(p_map), 1);
+				is_map = 1;
+				continue;
 			}
-			// printf("(%c)--(%d)--(%d)--(%d)\n",map[i][j], j, (int)ft_strlen(map[i - 1]), (int)ft_strlen(map[i + 1]));
-			if (map[i][j] == '0' && (map[i][j + 1] == ' ' || map[i][j - 1] == ' ' || map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || j >= (int)ft_strlen(map[i - 1]) || j >= (int)ft_strlen(map[i + 1])))
-			{
-				printf("error\n");
-				exit(1);
-			}
-			j++;
+			else if (status == 0)
+				return (printf("Error\n"), free(line), free_map(p_map), 1);
 		}
-		// printf("-----------------------\n%d\n", i);
-		// printf("-----------------------\n");
-		i++;
+		counter++;
+		free(line);
 	}
-	check_w(map[c - 1]);
-	if (cou != 1)
-	{
-		printf("error\n");
-		exit(1);
-	}
-	p_map->map = map;
-	return 0;
-}
 
-int main(int ac, char **av)
-{
-	t_map *p_map;
+	if (counter != 6 || !is_texture_valid(p_map))
+		return (printf("Error\n"), free_map(p_map), 1);
 
-	p_map = malloc(sizeof(t_map));
-    if (ac != 2 || !check_namnf(p_map, av[1]))
-        return 1;
-	 char *s;
-	 char *j = ft_strdup("");
-	 char **map;
-    while((s = get_next_line(p_map->fd))){
-        j = ft_strjoin(j, s);
-    }
-	map = ft_split(j, '\n');
+	map = ft_split(map_oned, '\n');
+	if (!map)
+		return (printf("Error\n"), free(map_oned), free_map(p_map), 1);
+	free(map_oned);
 	parse_map(p_map, map);
-	return 0;
+
 }
+
+
+

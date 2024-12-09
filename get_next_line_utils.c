@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:20:12 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/08 21:08:19 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/12/09 02:44:14 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	
 	i = 0;
 	j = 0;
+	if (!s1)
+		return (ft_strdup(s2));
 	nstr = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if(!nstr)
 		return(NULL);
