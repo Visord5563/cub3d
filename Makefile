@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: relamine <relamine@student.42.fr>          +#+  +:+       +#+         #
+#    By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/03 17:08:07 by saharchi          #+#    #+#              #
-#    Updated: 2024/12/09 10:01:28 by relamine         ###   ########.fr        #
+#    Updated: 2024/12/09 14:52:36 by saharchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,6 @@ $(NAME): $(OBJ) $(LIBFT)
 
 %.o: %.c 
 	cc $(CFLAGS) -c $< -o $@
-
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
-	mkdir -p $(OBJDIR)/bultins
-	mkdir -p $(OBJDIR)/parsing
-	mkdir -p $(OBJDIR)/execution
 
 clean:
 	$(RM) $(OBJ)

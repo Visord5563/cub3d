@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_map.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/09 18:47:41 by saharchi          #+#    #+#             */
+/*   Updated: 2024/12/09 18:47:42 by saharchi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "cub3d.h"
 
@@ -32,6 +44,21 @@ void check_w(char *map)
 	}
 }
 
+int is_space(char c)
+{
+	if (c == ' ' || c == '\t' || c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	return (0);
+}
+
+int check_space(char **map, int i, int j)
+{
+	if (is_space(map[i][j + 1]) || is_space(map[i][j - 1]) || is_space(map[i - 1][j]) || is_space(map[i + 1][j]))
+		return (1);
+	return (0);
+}
+
+
 int parse_map(t_map *p_map, char **map)
 {
 	int i = 0;
@@ -45,36 +72,39 @@ int parse_map(t_map *p_map, char **map)
 	while(map[i] && i < c - 1)
 	{
 		j = 0;
-		while(map[i][j] == ' ')
+		while(is_space(map[i][j]))
 			j++;
-		
 		check = ft_strtrim(map[i], " \t\v\f\r\n");
 		if (check[0] != '1' || check[ft_strlen(check) - 1] != '1')
 		{
 			printf("Error\n");
+			free(check);
 			exit(1);
 		}
 		while(map[i][j])
 		{
+			if (map[i][j] != '1' && map[i][j] != '0' && !is_space(map[i][j]) && map[i][j] != 'N' && map[i][j] != 'S' && map[i][j] != 'W' && map[i][j] != 'E')
+			{
+				printf("Error\n");
+				exit(1);
+			}
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
 			{
 				cou++;
-				if (map[i][j + 1] == ' ' || map[i][j - 1] == ' ' || map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || j >= (int)ft_strlen(map[i - 1]) || j >= (int)ft_strlen(map[i + 1]))
+				if (check_space(map, i, j) || j >= (int)ft_strlen(map[i - 1]) || j >= (int)ft_strlen(map[i + 1]))
 				{
 					printf("Error\n");
 					exit(1);
 				}
 			}
-			// printf("(%c)--(%d)--(%d)--(%d)\n",map[i][j], j, (int)ft_strlen(map[i - 1]), (int)ft_strlen(map[i + 1]));
-			if (map[i][j] == '0' && (map[i][j + 1] == ' ' || map[i][j - 1] == ' ' || map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || j >= (int)ft_strlen(map[i - 1]) || j >= (int)ft_strlen(map[i + 1])))
+			if (map[i][j] == '0' && (check_space(map, i, j) || j >= (int)ft_strlen(map[i - 1]) || j >= (int)ft_strlen(map[i + 1])))
 			{
 				printf("Error\n");
 				exit(1);
 			}
 			j++;
 		}
-		// printf("-----------------------\n%d\n", i);
-		// printf("-----------------------\n");
+		free(check);
 		i++;
 	}
 	check_w(map[c - 1]);
@@ -84,5 +114,6 @@ int parse_map(t_map *p_map, char **map)
 		exit(1);
 	}
 	p_map->map = map;
+	ft_free(map);
 	return 0;
 }

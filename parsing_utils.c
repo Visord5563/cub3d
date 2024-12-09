@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 09:41:29 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/09 03:51:38 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/09 17:58:54 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,4 @@ char *skip_space(char *line)
 		line++;
 	return (line);
 }
+
