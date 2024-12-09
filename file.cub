@@ -1,9 +1,9 @@
-NO ./texture/wall.jpeg 
+NO ./texture/wall.jpeg
 SO ./texture/wall.jpeg
-F 220,100,0
 WE ./texture/wall.jpeg
-C 225,30,0
 EA ./texture/wall.jpeg
+F 220,100,00000
+C 225,30,0
 
 
 
