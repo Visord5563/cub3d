@@ -6,7 +6,7 @@
 #    By: relamine <relamine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/03 17:08:07 by saharchi          #+#    #+#              #
-#    Updated: 2024/12/09 09:39:23 by relamine         ###   ########.fr        #
+#    Updated: 2024/12/09 10:01:28 by relamine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,9 @@ OBJ = $(SRC:%.c=%.o)
 
 all: $(NAME)
 
+build:
+	@cd MLX42 && cmake -B build && cmake --build build -j4 
+	
 $(LIBFT): ./libft/*.c ./libft/libft.h 
 	make -C ./libft/
 
