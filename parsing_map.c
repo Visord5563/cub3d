@@ -3,7 +3,7 @@
 
 int check_namnf(t_map *p_map, char *av)
 {
-    if(ft_strlen(ft_strchr(av, '.')) == 4 && !ft_strcmp(strchr(av, '.'), ".cub"))
+    if(ft_strlen(ft_strchr(av, '.')) == 4 && !ft_strcmp(ft_strchr(av, '.'), ".cub"))
     {
 		p_map->fd = open(av, O_RDONLY);
 		if (p_map->fd == -1) 

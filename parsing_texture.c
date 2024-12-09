@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:32:55 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/09 02:58:20 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/09 06:56:48 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,14 @@ int parsing_texture(char *line, t_map *map, int counter)
 	if (ft_count(texture) != 2)
 		return (ft_free(texture), 0);
 	else if (!ft_strcmp(texture[0], "NO"))
-		map->no = ft_strdup(texture[1]);
+		map->no = texture[1];
 	else if (!ft_strcmp(texture[0], "SO"))
-		map->so = ft_strdup(texture[1]);
+		map->so = texture[1];
 	else if (!ft_strcmp(texture[0], "WE"))
-		map->we = ft_strdup(texture[1]);
+		map->we = texture[1];
 	else if (!ft_strcmp(texture[0], "EA"))
-		map->ea = ft_strdup(texture[1]);
-	return (ft_free(texture), 1);
+		map->ea = texture[1];
+	else
+		return (ft_free(texture), 0);
+	return (free(texture[0]), free(texture), 1);
 }
