@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/10 07:22:40 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:29:58 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 145
 #endif
+
+// map size
+#define WIDTH 1200
+#define HEIGHT 1000
+#define M_WIDTH (WIDTH / 4)
+#define M_HEIGHT (HEIGHT / 4)
 
 typedef struct s_color
 {
@@ -55,6 +61,8 @@ typedef struct s_player
 typedef struct s_map
 {
     char **map;
+	int	cell_width;
+	int	cell_height;
     int fd;
 	char *no;
 	char *so;
@@ -93,5 +101,7 @@ void	get_posplayer(t_map *p_map, int i, int j);
 
 // part exucution
 
-void minimap(t_map *p_map);
-
+void	map_render(t_map *p_map);
+void	minimap(t_map *p_map, mlx_t* mlx);
+int		get_rgba(int r, int g, int b, int a);
+int		get_cell_color(t_map *p_map, int x, int y);

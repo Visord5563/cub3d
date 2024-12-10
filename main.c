@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:37 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/10 07:23:17 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/10 10:04:41 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 	init_map(&p_map);
     if (argc != 2 || !check_namnf(p_map, argv[1]))
         return (free_map(p_map), 1);
-	atexit(f);
+	// atexit(f);
 	while ((line = get_next_line(p_map->fd)))
 	{
 		if (skip_line_empty(line) && !is_map)
@@ -78,7 +78,6 @@ int main(int argc, char **argv)
 					return (printf("Error\n"), free(line), free_map(p_map), 1);
 				free(line);
 				is_map = 1;
-
 				continue;
 			}
 			else if (status == 0)
@@ -101,8 +100,7 @@ int main(int argc, char **argv)
 		return (printf("Error\n"), free(map_oned), free_map(p_map), 1);
 	free(map_oned);
 	parse_map(p_map);
-	// minimap();
-	
+	map_render(p_map);
 }
 
 

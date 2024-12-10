@@ -6,7 +6,7 @@
 #    By: relamine <relamine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/03 17:08:07 by saharchi          #+#    #+#              #
-#    Updated: 2024/12/10 06:24:29 by relamine         ###   ########.fr        #
+#    Updated: 2024/12/10 13:13:33 by relamine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
 SRC = main.c get_next_line.c get_next_line_utils.c my_split.c parsing_color.c parsing_map.c  parsing_texture.c parsing_utils.c parsing_utils_2.c \
-		minimap.c
+		minimap.c map.c
 
 OBJ = $(SRC:%.c=%.o)
 

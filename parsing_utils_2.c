@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 02:04:36 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/10 07:18:30 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:29:44 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,23 @@ void get_posplayer(t_map *p_map, int i, int j)
 		p_map->player.dir = E;
 	p_map->player.x = j;
 	p_map->player.y = i;
+}
+
+int get_rgba(int r, int g, int b, int a)
+{
+    return (r << 24 | g << 16 | b << 8 | a);
+}
+
+int get_cell_color(t_map *p_map, int x, int y)
+{
+    int color;
+
+    if (p_map->map[y][x] == '1')
+        color = get_rgba(255, 255, 255, 255);
+    else if (p_map->map[y][x] == ' ')
+        color = get_rgba(100, 100, 100, 0);
+    else
+        color = get_rgba(0, 0, 0, 100);
+
+    return color;
 }
