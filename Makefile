@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+         #
+#    By: relamine <relamine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/03 17:08:07 by saharchi          #+#    #+#              #
-#    Updated: 2024/12/09 14:52:36 by saharchi         ###   ########.fr        #
+#    Updated: 2024/12/10 06:24:29 by relamine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ LIBFT = ./libft/libft.a
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
-SRC = main.c get_next_line.c get_next_line_utils.c my_split.c parsing_color.c parsing_map.c  parsing_texture.c parsing_utils.c parsing_utils_2.c
+SRC = main.c get_next_line.c get_next_line_utils.c my_split.c parsing_color.c parsing_map.c  parsing_texture.c parsing_utils.c parsing_utils_2.c \
+		minimap.c
 
 OBJ = $(SRC:%.c=%.o)
 
@@ -44,7 +45,3 @@ fclean: clean
 	make -C ./libft/ fclean
 
 re: fclean all
-
-
-#cmake -B build
-#cmake --build build -j4 

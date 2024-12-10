@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:37 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/09 18:43:55 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/12/10 07:23:17 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,20 @@ int main(int argc, char **argv)
 	}
 	if (counter != 6 || !is_texture_valid(p_map))
 		return (printf("Error\n"), free_map(p_map), 1);
+	else
+	{
+		close(p_map->fd);
+		p_map->fd = -1;
+	}
+
 	check_newline(map_oned, p_map);
-	map = ft_split(map_oned, '\n');
-	if (!map)
+	p_map->map = ft_split(map_oned, '\n');
+	if (!p_map->map)
 		return (printf("Error\n"), free(map_oned), free_map(p_map), 1);
 	free(map_oned);
-	parse_map(p_map, map);
-	free(p_map);
+	parse_map(p_map);
+	// minimap();
+	
 }
 
 

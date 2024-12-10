@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/09 03:17:04 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/10 07:22:40 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 //------------
 
 # include "libft/libft.h"
+#include "./MLX42/include/MLX42/MLX42.h"
+
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 145
@@ -35,6 +37,21 @@ typedef struct s_color
 	int b;
 } t_color;
 
+enum e_direction
+{
+	N,
+	S,
+	E,
+	W, 
+};
+
+typedef struct s_player
+{
+	int x;
+	int y;
+	int dir;
+} t_player;
+
 typedef struct s_map
 {
     char **map;
@@ -45,6 +62,7 @@ typedef struct s_map
 	char *ea;
 	t_color f;
 	t_color c;
+	t_player player;
 } t_map;
 
 char	*get_next_line(int fd);
@@ -69,7 +87,11 @@ int		skip_line_empty(char *line);
 char	*skip_space(char *line);
 void	init_map(t_map **p_map);
 void	free_map(t_map *map);
-int		parse_map(t_map *p_map, char **map);
+int		parse_map(t_map *p_map);
 int		check_namnf(t_map *p_map, char *av);
+void	get_posplayer(t_map *p_map, int i, int j);
 
+// part exucution
+
+void minimap(t_map *p_map);
 

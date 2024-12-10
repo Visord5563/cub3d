@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 02:04:36 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/09 02:56:07 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/10 07:18:30 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,18 @@ void free_map(t_map *map)
 	if (map->fd != -1)
 		close(map->fd);
 	free(map);
+}
+
+void get_posplayer(t_map *p_map, int i, int j)
+{
+	if (p_map->map[i][j] == 'N')
+		p_map->player.dir = N;
+	if (p_map->map[i][j] == 'S')
+		p_map->player.dir = S;
+	if (p_map->map[i][j] == 'W')
+		p_map->player.dir = W;
+	if (p_map->map[i][j] == 'E')
+		p_map->player.dir = E;
+	p_map->player.x = j;
+	p_map->player.y = i;
 }
