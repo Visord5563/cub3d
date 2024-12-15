@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/10 15:29:58 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:27:31 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ enum e_direction
 
 typedef struct s_player
 {
+	mlx_image_t*	player;
 	int x;
 	int y;
 	int dir;
@@ -105,3 +106,4 @@ void	map_render(t_map *p_map);
 void	minimap(t_map *p_map, mlx_t* mlx);
 int		get_rgba(int r, int g, int b, int a);
 int		get_cell_color(t_map *p_map, int x, int y);
+void	move_player(t_map *p_map, mlx_t* mlx);

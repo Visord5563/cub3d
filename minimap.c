@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:54:27 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/10 15:30:21 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:45:53 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void render_player(t_map *p_map, mlx_t* mlx)
 	player_width = (p_map->cell_width / 2);
 	player_height = (p_map->cell_height / 2);
 	player = mlx_new_image(mlx, player_width, player_height);
-	if (!player || (mlx_image_to_window(mlx, player, 0, 0) < 0))
+	if (!player || (mlx_image_to_window(mlx, player, (p_map->player.x *  p_map->cell_width),
+		(p_map->player.y * p_map->cell_height)) < 0))
 		printf("wError\n"), exit(1);
 	y = 0;
 	while (y < player_height)
@@ -36,8 +37,7 @@ void render_player(t_map *p_map, mlx_t* mlx)
 		}
 		y++;
 	}
-	player->instances[0].x = p_map->player.x *  p_map->cell_width;
-	player->instances[0].y = p_map->player.y * p_map->cell_height;
+	p_map->player.player = player;
 }
 
 int get_max_width(t_map *p_map)
