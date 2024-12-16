@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/10 16:27:31 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/16 22:13:55 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <math.h>
 //------------
 #include <string.h>
 # include <limits.h>
@@ -36,6 +37,13 @@
 #define M_WIDTH (WIDTH / 4)
 #define M_HEIGHT (HEIGHT / 4)
 
+// raycasting
+#define FOV 60
+#define player_angle  M_PI / 2
+#define TILE_SIZE 64
+
+
+
 typedef struct s_color
 {
 	int r;
@@ -51,6 +59,7 @@ enum e_direction
 	W, 
 };
 
+
 typedef struct s_player
 {
 	mlx_image_t*	player;
@@ -58,6 +67,12 @@ typedef struct s_player
 	int y;
 	int dir;
 } t_player;
+
+typedef struct s_ray
+{
+	float angle;
+	float dist;
+} t_ray;
 
 typedef struct s_map
 {
@@ -74,13 +89,13 @@ typedef struct s_map
 	t_player player;
 } t_map;
 
+
 char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
 int		ft_strchr2( char *s);
-// char	**ft_split(char *s, char c);
-// char	*ft_substr(char *s, unsigned int start, size_t len);
+
 
 
 // part parsing
@@ -107,3 +122,6 @@ void	minimap(t_map *p_map, mlx_t* mlx);
 int		get_rgba(int r, int g, int b, int a);
 int		get_cell_color(t_map *p_map, int x, int y);
 void	move_player(t_map *p_map, mlx_t* mlx);
+// raycasting
+void raycasting(t_map *p_map, mlx_t* mlx, mlx_image_t* map);
+
