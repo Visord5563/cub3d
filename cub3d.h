@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/16 22:13:55 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/12/18 23:39:48 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,13 @@
 
 // raycasting
 #define FOV 60
-#define player_angle  M_PI / 2
-#define TILE_SIZE 64
-
+#define player_angle   M_PI / 2
+#define TILE_SIZE 30
+#define DIST_PROJ_PLANE (WIDTH / (2 * tan((FOV * M_PI / 180) / 2)))
+#define UP(ray_angle)    (sin(ray_angle) < 0)
+#define DOWN(ray_angle)  (sin(ray_angle) > 0)
+#define LEFT(ray_angle)  (cos(ray_angle) < 0)
+#define RIGHT(ray_angle) (cos(ray_angle) > 0)
 
 
 typedef struct s_color

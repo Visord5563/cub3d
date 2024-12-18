@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:10:37 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/16 22:24:33 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/12/17 13:54:59 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void map_render(t_map *p_map)
 
 	ft_memset(map->pixels, 100, map->width * map->height * sizeof(int32_t));
 
-		minimap(p_map, mlx);
-		move_player(p_map, mlx);
-		raycasting(p_map, mlx, map);
-		mlx_loop(mlx);
-		mlx_terminate(mlx);
+	minimap(p_map, mlx);
+	move_player(p_map, mlx);
+	raycasting(p_map, mlx, map);
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
 	
 }
