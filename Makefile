@@ -14,7 +14,7 @@ NAME = cub3D
 
 LIBFT = ./libft/libft.a
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast -fsanitize=address -g
 RM = rm -f
 
 SRC = main.c get_next_line.c get_next_line_utils.c my_split.c parsing_color.c parsing_map.c  parsing_texture.c parsing_utils.c parsing_utils_2.c \
@@ -31,8 +31,7 @@ $(LIBFT): ./libft/*.c ./libft/libft.h
 	make -C ./libft/
 
 $(NAME): $(OBJ) $(LIBFT) cub3d.h
-	cc $(CFLAGS) -framework Cocoa -framework OpenGL -framework IOKit ./MLX42/build/libmlx42.a  $(OBJ) $(LIBFT) -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"  -o $(NAME)
-
+	gcc $(CFLAGS) $(OBJ) $(LIBFT) ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm -o $(NAME)
 %.o: %.c cub3d.h
 	cc $(CFLAGS) -c $< -o $@
 

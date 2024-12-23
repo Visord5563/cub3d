@@ -25,13 +25,12 @@ void map_render(t_map *p_map)
 	map = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!map || (mlx_image_to_window(mlx, map, 0, 0) < 0))
 		printf("-Error\n"), exit(1);
-
 	ft_memset(map->pixels, 100, map->width * map->height * sizeof(int32_t));
-
-	minimap(p_map, mlx);
-	move_player(p_map, mlx);
-	raycasting(p_map, mlx, map);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	// minimap(p_map, mlx);
+	// move_player(p_map, mlx);
+		raycasting(p_map, mlx, map);
+		mlx_loop(mlx);
+		mlx_terminate(mlx);
 	
 }
+

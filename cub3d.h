@@ -42,10 +42,6 @@
 #define player_angle   M_PI / 2
 #define TILE_SIZE 30
 #define DIST_PROJ_PLANE (WIDTH / (2 * tan((FOV * M_PI / 180) / 2)))
-#define UP(ray_angle)    (sin(ray_angle) < 0)
-#define DOWN(ray_angle)  (sin(ray_angle) > 0)
-#define LEFT(ray_angle)  (cos(ray_angle) < 0)
-#define RIGHT(ray_angle) (cos(ray_angle) > 0)
 
 
 typedef struct s_color
@@ -70,6 +66,11 @@ typedef struct s_player
 	int x;
 	int y;
 	int dir;
+	// int rot_angle;
+	// int walk_dir;
+	// int turn_dir;
+	// int walk_speed;
+	// int turn_speed;
 } t_player;
 
 typedef struct s_ray
@@ -91,6 +92,8 @@ typedef struct s_map
 	t_color f;
 	t_color c;
 	t_player player;
+	// mlx_t* mlx;
+	// mlx_image_t* mapi;
 } t_map;
 
 
@@ -115,7 +118,7 @@ int		skip_line_empty(char *line);
 char	*skip_space(char *line);
 void	init_map(t_map **p_map);
 void	free_map(t_map *map);
-int		parse_map(t_map *p_map);
+void		parse_map(t_map *p_map);
 int		check_namnf(t_map *p_map, char *av);
 void	get_posplayer(t_map *p_map, int i, int j);
 

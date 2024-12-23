@@ -40,21 +40,23 @@ int main(int argc, char **argv)
 {
 	t_map	*p_map;
 	int		status;
-	int		i;
+	// int		i;
 	int		counter;
 	char	*line;
 	char	*map_oned;
-	char	**map;
+	// char	**map;
 	int		is_map;
 
-	i = 1;
+	// i = 1;
 	counter = 0;
 	map_oned = NULL;
-	map = NULL;
+	// map = NULL;
 	is_map = 0;
 	init_map(&p_map);
     if (argc != 2 || !check_namnf(p_map, argv[1]))
+	{
         return (free_map(p_map), 1);
+	}
 	// atexit(f);
 	while ((line = get_next_line(p_map->fd)))
 	{

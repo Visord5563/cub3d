@@ -63,6 +63,11 @@ void get_posplayer(t_map *p_map, int i, int j)
 		p_map->player.dir = E;
 	p_map->player.x = j;
 	p_map->player.y = i;
+	// p_map->player.walk_dir = 0;
+	// p_map->player.turn_dir = 0;
+	// p_map->player.rot_angle = M_PI / 2;
+	// p_map->player.walk_speed = 2;
+	// p_map->player.turn_speed = 2 * (M_PI / 180);
 }
 
 int get_rgba(int r, int g, int b, int a)
