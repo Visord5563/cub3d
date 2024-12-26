@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 17:35:21 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/26 04:16:04 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/26 05:55:52 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ void raycasting(t_map *p_map, mlx_t *mlx, mlx_image_t *map)
         if (wall_top < 0)
             wall_top = 0;
         if (wall_bottom > HEIGHT) wall_bottom = HEIGHT;
-
         for (int y = (int)wall_top; y < (int)wall_bottom; y++)
         {
             mlx_put_pixel(map, i, y, get_rgba(241, 196, 15, 255));

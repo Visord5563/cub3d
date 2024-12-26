@@ -63,6 +63,7 @@
     "ios": "c",
     "string": "c",
     "type_traits": "c",
-    "complex": "c"
+    "complex": "c",
+    "__node_handle": "c"
   }
 }

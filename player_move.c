@@ -6,11 +6,42 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:55:56 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/26 05:34:50 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/26 07:14:20 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int hit_wall(t_map *p_map, double x, double y, double player_width, double player_height)
+{
+    int map_x_start;
+    int map_y_start;
+    int map_x_end;
+    int map_y_end;
+	int i;
+	int j;
+
+    map_x_start = floor((x - player_width / 2) / TILE_SIZE);
+    map_y_start = floor((y - player_height / 2) / TILE_SIZE);
+    map_x_end = floor((x + player_width / 2) / TILE_SIZE);
+    map_y_end = floor((y + player_height / 2) / TILE_SIZE);
+
+    i = map_x_start;
+    while (i <= map_x_end)
+	{
+        j = map_y_start;
+        while (j <= map_y_end)
+		{
+            if (j >= ft_count(p_map->map) || j < 0 || i < 0 || (size_t)i >= ft_strlen(p_map->map[j]))
+                return (1);
+            if (p_map->map[j][i] == '1')
+                return (1);
+            j++;
+        }
+        i++;
+    }
+    return (0);
+}
 
 void close_win(void *param)
 {
@@ -70,29 +101,32 @@ void keyfunc(mlx_key_data_t keydata, void* param)
 		return ;
 	
 	p_map->player.rot_angle += p_map->player.turn_dir * p_map->player.turn_speed;
-	printf("rot_angle = %f\n", p_map->player.rot_angle);
 
 	movestep = p_map->player.walk_dir * p_map->player.walk_speed;
 	if (p_map->player.walk_side != 0)
 	{
 		if (p_map->player.walk_side == 1)
 		{
-			p_map->player.y_double += cos(p_map->player.rot_angle) * p_map->player.walk_speed;
-			p_map->player.x_double -= sin(p_map->player.rot_angle) * p_map->player.walk_speed;	
+			y_player += cos(p_map->player.rot_angle) * p_map->player.walk_speed;
+			x_player -= sin(p_map->player.rot_angle) * p_map->player.walk_speed;	
 		}
 		else
 		{
-			p_map->player.y_double -= cos(p_map->player.rot_angle) * p_map->player.walk_speed;
-			p_map->player.x_double += sin(p_map->player.rot_angle) * p_map->player.walk_speed;	
+			y_player -= cos(p_map->player.rot_angle) * p_map->player.walk_speed;
+			x_player += sin(p_map->player.rot_angle) * p_map->player.walk_speed;	
 		}
 	}
 	else
 	{
-		p_map->player.y_double += movestep * sin(p_map->player.rot_angle);
-		p_map->player.x_double += movestep * cos(p_map->player.rot_angle);	
+		y_player += movestep * sin(p_map->player.rot_angle);
+		x_player += movestep * cos(p_map->player.rot_angle);	
+	}
+	if (!hit_wall(p_map, x_player, y_player, TILE_SIZE / 3 , TILE_SIZE / 3))
+	{
+		p_map->player.y_double = y_player;
+		p_map->player.x_double = x_player;
 	}
 	raycasting(p_map, p_map->mlx, p_map->map_img);
-	printf("---------\n");
 	key_release(p_map);
 }
 
