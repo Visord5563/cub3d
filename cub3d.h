@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/18 23:39:48 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/12/25 02:27:22 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 
 // raycasting
 #define FOV 60
-#define player_angle   M_PI / 2
 #define TILE_SIZE 30
 #define DIST_PROJ_PLANE (WIDTH / (2 * tan((FOV * M_PI / 180) / 2)))
 
@@ -51,26 +50,20 @@ typedef struct s_color
 	int b;
 } t_color;
 
-enum e_direction
-{
-	N,
-	S,
-	E,
-	W, 
-};
-
 
 typedef struct s_player
 {
 	mlx_image_t*	player;
 	int x;
 	int y;
-	int dir;
-	// int rot_angle;
-	// int walk_dir;
-	// int turn_dir;
-	// int walk_speed;
-	// int turn_speed;
+	double x_double;
+	double y_double;
+	double rot_angle;
+	int walk_dir; // -1 for back, 1 for front
+	int walk_side; // -1 for move left, 1 for right
+	int turn_dir; // -1 for left, 1 for right
+	double walk_speed;
+	double turn_speed;
 } t_player;
 
 typedef struct s_ray
@@ -92,8 +85,8 @@ typedef struct s_map
 	t_color f;
 	t_color c;
 	t_player player;
-	// mlx_t* mlx;
-	// mlx_image_t* mapi;
+	mlx_t* mlx;
+	mlx_image_t* map_img;
 } t_map;
 
 

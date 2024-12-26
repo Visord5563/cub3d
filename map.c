@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:10:37 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/17 13:54:59 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/12/26 04:43:49 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,20 @@
 
 void map_render(t_map *p_map)
 {
-	mlx_image_t*	map;
-	mlx_t*			mlx;
-
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx = mlx_init(WIDTH, HEIGHT, "42Balls", true);
-	if (!mlx)
+	p_map->mlx = mlx_init(WIDTH, HEIGHT, "42Balls", true);
+	if (!p_map->mlx)
 		printf("Error\n"), exit(1);
 
-	map = mlx_new_image(mlx, WIDTH, HEIGHT);
-	if (!map || (mlx_image_to_window(mlx, map, 0, 0) < 0))
+	p_map->map_img = mlx_new_image(p_map->mlx, WIDTH, HEIGHT);
+	if (!p_map->map_img || (mlx_image_to_window(p_map->mlx, p_map->map_img, 0, 0) < 0))
 		printf("-Error\n"), exit(1);
-	ft_memset(map->pixels, 100, map->width * map->height * sizeof(int32_t));
-	// minimap(p_map, mlx);
-	// move_player(p_map, mlx);
-		raycasting(p_map, mlx, map);
-		mlx_loop(mlx);
-		mlx_terminate(mlx);
-	
+	ft_memset(p_map->map_img->pixels, 100, p_map->map_img->width * p_map->map_img->height * sizeof(int32_t));
+	// minimap(p_map, p_map->mlx);
+
+	// raycasting(p_map, p_map->mlx, p_map->map_img);
+	// move_player(p_map, p_map->mlx);
+	mlx_loop(p_map->mlx);
+	mlx_terminate(p_map->mlx);
 }
 

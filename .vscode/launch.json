@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/relamine/Desktop/cub3d",
-      "program": "/Users/relamine/Desktop/cub3d/build/Debug/outDebug"
+      "cwd": "/Users/relamine/Desktop/riad",
+      "program": "/Users/relamine/Desktop/riad/build/Debug/outDebug"
     }
   ]
 }

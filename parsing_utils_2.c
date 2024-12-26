@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 02:04:36 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/17 14:41:00 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/12/26 02:21:43 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,22 @@ void free_map(t_map *map)
 void get_posplayer(t_map *p_map, int i, int j)
 {
 	if (p_map->map[i][j] == 'N')
-		p_map->player.dir = N;
+		p_map->player.rot_angle = 3 * M_PI / 2;
 	if (p_map->map[i][j] == 'S')
-		p_map->player.dir = S;
+		p_map->player.rot_angle = M_PI / 2;
 	if (p_map->map[i][j] == 'W')
-		p_map->player.dir = W;
+		p_map->player.rot_angle = M_PI;
 	if (p_map->map[i][j] == 'E')
-		p_map->player.dir = E;
+		p_map->player.rot_angle = 0;
 	p_map->player.x = j;
 	p_map->player.y = i;
-	// p_map->player.walk_dir = 0;
-	// p_map->player.turn_dir = 0;
-	// p_map->player.rot_angle = M_PI / 2;
-	// p_map->player.walk_speed = 2;
-	// p_map->player.turn_speed = 2 * (M_PI / 180);
+	p_map->player.y_double = p_map->player.y * TILE_SIZE + TILE_SIZE / 2.0;
+    p_map->player.x_double = p_map->player.x * TILE_SIZE + TILE_SIZE / 2.0;
+	p_map->player.walk_dir = 0;
+	p_map->player.walk_side = 0;
+	p_map->player.turn_dir = 0;
+	p_map->player.walk_speed = 2.0;
+	p_map->player.turn_speed = 2 * (M_PI / 180);
 }
 
 int get_rgba(int r, int g, int b, int a)

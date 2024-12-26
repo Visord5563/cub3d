@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:37 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/17 14:39:50 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/12/26 04:47:57 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void check_newline(char *map_oned, t_map *map)
 	}
 }
 
+void leaks(void)
+{
+	system("leaks cub3D");
+}
+
 int main(int argc, char **argv)
 {
 	t_map	*p_map;
@@ -48,6 +53,7 @@ int main(int argc, char **argv)
 	int		is_map;
 
 	// i = 1;
+	atexit(leaks);
 	counter = 0;
 	map_oned = NULL;
 	// map = NULL;
@@ -73,7 +79,7 @@ int main(int argc, char **argv)
 			status = parsing_texture(line, p_map, counter);
 			if (status == 2)
 			{
-				if (counter != 6 || !is_texture_valid(p_map))
+				if (counter != 6 || (!is_texture_valid(p_map) && !is_map))
 					return (printf("Error\n"), free(line), free_map(p_map), 1);
 				map_oned = ft_strjoin(map_oned, line);
 				if (!map_oned)
@@ -88,7 +94,7 @@ int main(int argc, char **argv)
 		counter++;
 		free(line);
 	}
-	if (counter != 6 || !is_texture_valid(p_map))
+	if ( !map_oned || counter != 6 || !is_texture_valid(p_map))
 		return (printf("Error\n"), free_map(p_map), 1);
 	else
 	{
@@ -102,7 +108,7 @@ int main(int argc, char **argv)
 		return (printf("Error\n"), free(map_oned), free_map(p_map), 1);
 	free(map_oned);
 	parse_map(p_map);
-	map_render(p_map);
+	// map_render(p_map);
 }
 
 

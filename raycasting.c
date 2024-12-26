@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 17:35:21 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/18 23:43:16 by saharchi         ###   ########.fr       */
+/*   Updated: 2024/12/26 04:16:04 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 double get_horizontal(t_map *p_map, double ray_angle)
 {
     double x_inter, y_inter, x_step, y_step;
-    int player_x = p_map->player.x * TILE_SIZE + TILE_SIZE / 2;
-    int player_y = p_map->player.y * TILE_SIZE + TILE_SIZE / 2;
+    double player_x = p_map->player.x_double;
+    double player_y = p_map->player.y_double;
+
     int rayfacingdown = 0;
     if (ray_angle > 0 && ray_angle < M_PI)
         rayfacingdown = 1;
@@ -39,19 +40,21 @@ double get_horizontal(t_map *p_map, double ray_angle)
     if (rayfacingright && x_step < 0)
         x_step *= -1;
 
-    y_inter = player_y / TILE_SIZE * TILE_SIZE;
+    y_inter = floor(player_y / TILE_SIZE) * TILE_SIZE;
     if (rayfacingdown)
         y_inter += TILE_SIZE;
     x_inter = player_x + (y_inter - player_y) / tan(ray_angle);
 
     while (x_inter >= 0 && x_inter < WIDTH && y_inter >= 0 && y_inter < HEIGHT)
     {
-        int map_x = (int)(x_inter / TILE_SIZE);
-        int map_y = (int)(y_inter / TILE_SIZE);
+        int map_x = floor(x_inter / TILE_SIZE);
+        int map_y = floor(y_inter / TILE_SIZE);
         if (rayfacingup)
             map_y -= 1;
-
-        if (p_map->map[(int)floor(map_y)][(int)floor(map_x)] == '1')
+        
+        if (map_y >= ft_count(p_map->map) || map_y < 0 || map_x < 0 || (size_t)map_x >= ft_strlen(p_map->map[map_y]))
+            return -1;
+        if (p_map->map[map_y][map_x] == '1')
             return sqrt(pow(x_inter - player_x, 2) + pow(y_inter - player_y, 2));
 
         x_inter += x_step;
@@ -64,8 +67,9 @@ double get_horizontal(t_map *p_map, double ray_angle)
 double get_vertical(t_map *p_map, double ray_angle)
 {
     double x_inter, y_inter, x_step, y_step;
-    int player_x = p_map->player.x * TILE_SIZE + TILE_SIZE / 2;
-    int player_y = p_map->player.y * TILE_SIZE + TILE_SIZE / 2;
+    double player_x = p_map->player.x_double;
+    double player_y = p_map->player.y_double;
+
     int rayfacingleft = 0;
     if (ray_angle > 0.5 * M_PI && ray_angle < 1.5 * M_PI)
         rayfacingleft = 1;
@@ -88,22 +92,22 @@ double get_vertical(t_map *p_map, double ray_angle)
     if (rayfacingdown && y_step < 0)
         y_step *= -1;
 
-    x_inter = player_x / TILE_SIZE * TILE_SIZE;
+    x_inter = floor(player_x / TILE_SIZE) * TILE_SIZE;
     if (rayfacingright)
         x_inter += TILE_SIZE;
     y_inter = player_y + (x_inter - player_x) * tan(ray_angle);
 
     while (x_inter >= 0 && x_inter < WIDTH && y_inter >= 0 && y_inter < HEIGHT)
     {
-        int map_x = (int)(x_inter / TILE_SIZE);
+        int map_x = floor(x_inter / TILE_SIZE);
         if (rayfacingleft)
             map_x -= 1;
-        int map_y = (int)(y_inter / TILE_SIZE);
+        int map_y = floor(y_inter / TILE_SIZE);
 
-        if (map_y >= ft_count(p_map->map) || map_x < 0 || (size_t)map_x >= ft_strlen(p_map->map[map_y]))
+        if (map_y >= ft_count(p_map->map) || map_y < 0 || map_x < 0 || (size_t)map_x >= ft_strlen(p_map->map[map_y]))
             return -1;
 
-        if (p_map->map[(int)floor(map_y)][(int)floor(map_x)] == '1')
+        if (p_map->map[map_y][map_x] == '1')
             return sqrt(pow(x_inter - player_x, 2) + pow(y_inter - player_y, 2));
 
         x_inter += x_step;
@@ -121,8 +125,7 @@ void raycasting(t_map *p_map, mlx_t *mlx, mlx_image_t *map)
     double wall_height, wall_top, wall_bottom;
     double angle_increment = FOV * (M_PI / 180) / WIDTH;
     int i = 0;
-
-    ray_angle = player_angle - (FOV * (M_PI / 180) / 2);
+    ray_angle = p_map->player.rot_angle - (FOV * (M_PI / 180) / 2);
 
     while (i < WIDTH)
     {
@@ -135,7 +138,7 @@ void raycasting(t_map *p_map, mlx_t *mlx, mlx_image_t *map)
         else
             distance = distance_v;
 
-        distance *= cos(ray_angle - player_angle);
+        distance *= cos(ray_angle - p_map->player.rot_angle);
         wall_height = (TILE_SIZE * DIST_PROJ_PLANE) / distance;
         wall_top = (HEIGHT / 2) - (wall_height / 2);
         wall_bottom = wall_top + wall_height;
