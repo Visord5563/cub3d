@@ -6,11 +6,21 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:55:56 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/26 05:14:50 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/26 05:34:50 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void close_win(void *param)
+{
+	t_map *p_map;
+
+	p_map = (t_map*)param;
+	free_map(p_map);
+	mlx_terminate(p_map->mlx);
+	exit(0);
+}
 
 int check_key(mlx_key_data_t keydata, t_map *p_map)
 {
@@ -29,11 +39,7 @@ int check_key(mlx_key_data_t keydata, t_map *p_map)
 	else if (keydata.key == MLX_KEY_RIGHT)
 		p_map->player.turn_dir = 1;
 	else if (keydata.key == MLX_KEY_ESCAPE)
-	{
-		free_map(p_map);
-		mlx_terminate(p_map->mlx);
-		exit(0);
-	}
+		close_win(p_map);
 	else 
 		return (0);
 	return (1);
@@ -85,7 +91,6 @@ void keyfunc(mlx_key_data_t keydata, void* param)
 		p_map->player.y_double += movestep * sin(p_map->player.rot_angle);
 		p_map->player.x_double += movestep * cos(p_map->player.rot_angle);	
 	}
-	printf("x = %f, y = %f\n", p_map->player.x_double, p_map->player.y_double);
 	raycasting(p_map, p_map->mlx, p_map->map_img);
 	printf("---------\n");
 	key_release(p_map);
@@ -94,4 +99,5 @@ void keyfunc(mlx_key_data_t keydata, void* param)
 void move_player(t_map *p_map, mlx_t* mlx)
 {
 	mlx_key_hook(mlx, keyfunc, p_map);
+	mlx_close_hook(mlx, close_win, p_map);
 }

@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:37 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/26 04:47:57 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/26 05:23:17 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void check_newline(char *map_oned, t_map *map)
 		{
 			printf("Error\n");
 			free(map_oned);
-			free(map);
+			free_map(map);
 			exit(1);
 		}
 		i++;
@@ -108,7 +108,7 @@ int main(int argc, char **argv)
 		return (printf("Error\n"), free(map_oned), free_map(p_map), 1);
 	free(map_oned);
 	parse_map(p_map);
-	// map_render(p_map);
+	map_render(p_map);
 }
 
 
