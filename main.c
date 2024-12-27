@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:37 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/26 05:23:17 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/27 02:10:11 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 	int		is_map;
 
 	// i = 1;
-	atexit(leaks);
+	// atexit(leaks);
 	counter = 0;
 	map_oned = NULL;
 	// map = NULL;

@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:55:56 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/26 07:14:20 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/27 04:00:36 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void close_win(void *param)
 	t_map *p_map;
 
 	p_map = (t_map*)param;
-	free_map(p_map);
 	mlx_terminate(p_map->mlx);
+	free_map(p_map);
 	exit(0);
 }
 

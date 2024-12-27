@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 17:35:21 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/26 05:55:52 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/27 04:34:45 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,11 @@ void raycasting(t_map *p_map, mlx_t *mlx, mlx_image_t *map)
 
     while (i < WIDTH)
     {
-        ray_angle = fmod(ray_angle + (2 * M_PI), 2 * M_PI);
+        ray_angle = fmod(ray_angle, 2 * M_PI);
+        if (ray_angle < 0)
+        {
+            ray_angle += 2 * M_PI;
+        }
         distance_h = get_horizontal(p_map, ray_angle);
         distance_v = get_vertical(p_map, ray_angle);
 
