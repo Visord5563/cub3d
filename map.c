@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:10:37 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/26 05:21:21 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/30 10:51:41 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ void map_render(t_map *p_map)
 		printf("-Error\n"), exit(1);
 	ft_memset(p_map->map_img->pixels, 100, p_map->map_img->width * p_map->map_img->height * sizeof(int32_t));
 	// minimap(p_map, p_map->mlx);
-
-	raycasting(p_map, p_map->mlx, p_map->map_img);
-	move_player(p_map, p_map->mlx);
+	raycasting(p_map);
+	move_player(p_map);
 	mlx_loop(p_map->mlx);
-	mlx_terminate(p_map->mlx);
 }
 

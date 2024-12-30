@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 02:04:36 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/26 02:21:43 by relamine         ###   ########.fr       */
+/*   Updated: 2024/12/30 10:43:38 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,20 @@ void free_map(t_map *map)
 		ft_free(map->map);
 	if (map->fd != -1)
 		close(map->fd);
+	if (map->map_img)
+		mlx_delete_image(map->mlx, map->map_img);
+	if (map->player.player)
+		mlx_delete_image(map->mlx, map->player.player);
+	if (map->mlx)
+		mlx_terminate(map->mlx);
+	if (map->textures[0])
+		mlx_delete_texture(map->textures[0]);
+	if (map->textures[1])
+		mlx_delete_texture(map->textures[1]);
+	if (map->textures[2])
+		mlx_delete_texture(map->textures[2]);
+	if (map->textures[3])
+		mlx_delete_texture(map->textures[3]);
 	free(map);
 }
 
@@ -69,7 +83,9 @@ void get_posplayer(t_map *p_map, int i, int j)
 	p_map->player.walk_side = 0;
 	p_map->player.turn_dir = 0;
 	p_map->player.walk_speed = 2.0;
-	p_map->player.turn_speed = 2 * (M_PI / 180);
+	p_map->player.turn_speed = 1 * (M_PI / 180);
+	p_map->x_inter = -1;
+	p_map->y_inter = -1;
 }
 
 int get_rgba(int r, int g, int b, int a)
