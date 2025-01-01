@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/30 09:52:04 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/01 08:22:29 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct s_map
 	mlx_t* mlx;
 	mlx_image_t* map_img;
 	mlx_texture_t *textures[4];
+	int map_width;
+	int map_height;
 } t_map;
 
 

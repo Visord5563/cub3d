@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 02:04:36 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/30 10:43:38 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/01 08:41:39 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void get_posplayer(t_map *p_map, int i, int j)
 	p_map->player.walk_dir = 0;
 	p_map->player.walk_side = 0;
 	p_map->player.turn_dir = 0;
-	p_map->player.walk_speed = 2.0;
-	p_map->player.turn_speed = 1 * (M_PI / 180);
+	p_map->player.walk_speed = 6.0;
+	p_map->player.turn_speed = 6 * (M_PI / 180);
 	p_map->x_inter = -1;
 	p_map->y_inter = -1;
 }

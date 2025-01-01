@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:55:56 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/30 10:50:29 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/01 08:42:05 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,16 @@ void key_release(t_map *p_map)
 void keyfunc(mlx_key_data_t keydata, void* param)
 {
 	t_map	*p_map;
-
-	p_map = (t_map*)param;
-
 	double x_player;
 	double y_player;
 	double movestep;
 
+	p_map = (t_map*)param;
+
 	x_player = p_map->player.x_double;
 	y_player = p_map->player.y_double;
 
-	if (check_key(keydata, p_map))
-		ft_memset(p_map->map_img->pixels, 100, p_map->map_img->width * p_map->map_img->height * sizeof(int32_t));
-	else
+	if (!check_key(keydata, p_map))
 		return ;
 	
 	p_map->player.rot_angle += p_map->player.turn_dir * p_map->player.turn_speed;

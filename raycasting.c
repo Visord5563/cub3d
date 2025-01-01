@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 17:35:21 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/30 10:46:41 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/01 08:34:24 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ double get_horizontal(t_map *p_map, double ray_angle)
         y_inter += TILE_SIZE;
     x_inter = player_x + (y_inter - player_y) / tan(ray_angle);
 
-    while (x_inter >= 0 && x_inter < WIDTH && y_inter >= 0 && y_inter < HEIGHT)
+    while (x_inter >= 0 && x_inter < p_map->map_width && y_inter >= 0 && y_inter < p_map->map_height)
     {
         int map_x = floor(x_inter / TILE_SIZE);
         int map_y = floor(y_inter / TILE_SIZE);
@@ -100,7 +100,7 @@ double get_vertical(t_map *p_map, double ray_angle)
         x_inter += TILE_SIZE;
     y_inter = player_y + (x_inter - player_x) * tan(ray_angle);
 
-    while (x_inter >= 0 && x_inter < WIDTH && y_inter >= 0 && y_inter < HEIGHT)
+    while (x_inter >= 0 && x_inter < p_map->map_width && y_inter >= 0 && y_inter < p_map->map_height)
     {
         int map_x = floor(x_inter / TILE_SIZE);
         if (rayfacingleft)
@@ -180,7 +180,6 @@ void raycasting(t_map *p_map)
 
         distance_h = get_horizontal(p_map, ray_angle);
         distance_v = get_vertical(p_map, ray_angle);
-
         int side = 0;
         if (distance_h != -1 && (distance_v == -1 || distance_h < distance_v)) {
             p_map->y_inter = -1;
