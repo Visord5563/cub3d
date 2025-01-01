@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:55:56 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/01 08:42:05 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/01 17:22:28 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int hit_wall(t_map *p_map, double x, double y)
 	int i;
 	int j;
 
-    map_x_start = floor((x - (TILE_SIZE / 3) / 2) / TILE_SIZE);
-    map_y_start = floor((y - (TILE_SIZE / 3) / 2) / TILE_SIZE);
-    map_x_end = floor((x + (TILE_SIZE / 3) / 2) / TILE_SIZE);
-    map_y_end = floor((y + (TILE_SIZE / 3) / 2) / TILE_SIZE);
+    map_x_start = floor((x - PLAYER_SIZE / 2) / TILE_SIZE);
+    map_y_start = floor((y - PLAYER_SIZE / 2) / TILE_SIZE);
+    map_x_end = floor((x + PLAYER_SIZE / 2) / TILE_SIZE);
+    map_y_end = floor((y + PLAYER_SIZE / 2) / TILE_SIZE);
 
     i = map_x_start;
     while (i <= map_x_end)
@@ -32,7 +32,7 @@ int hit_wall(t_map *p_map, double x, double y)
         j = map_y_start;
         while (j <= map_y_end)
 		{
-            if (j >= ft_count(p_map->map) || j < 0 || i < 0 || (size_t)i >= ft_strlen(p_map->map[j]))
+            if (j < 0 || i < 0 || j >= p_map->map_height || i >= p_map->map_width)
                 return (1);
             if (p_map->map[j][i] == '1')
                 return (1);

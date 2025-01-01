@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 02:04:36 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/01 08:41:39 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/01 17:47:39 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ int get_cell_color(t_map *p_map, int x, int y)
 
     if (p_map->map[y][x] == '1')
         color = get_rgba(255, 255, 255, 255);
-    else if (p_map->map[y][x] == ' ')
-        color = get_rgba(100, 100, 100, 0);
     else
         color = get_rgba(0, 0, 0, 100);
 

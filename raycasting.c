@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 17:35:21 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/01 08:34:24 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/01 16:42:18 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ double get_horizontal(t_map *p_map, double ray_angle)
         y_inter += TILE_SIZE;
     x_inter = player_x + (y_inter - player_y) / tan(ray_angle);
 
-    while (x_inter >= 0 && x_inter < p_map->map_width && y_inter >= 0 && y_inter < p_map->map_height)
+    while (x_inter >= 0 && x_inter <( p_map->map_width * TILE_SIZE) && y_inter >= 0 && y_inter <( p_map->map_height * TILE_SIZE))
     {
         int map_x = floor(x_inter / TILE_SIZE);
         int map_y = floor(y_inter / TILE_SIZE);
         if (rayfacingup)
             map_y -= 1;
         
-        if (map_y >= ft_count(p_map->map) || map_y < 0 || map_x < 0 || (size_t)map_x >= ft_strlen(p_map->map[map_y]))
+        if (map_y < 0 || map_x < 0 || map_y >= p_map->map_height || map_x >= p_map->map_width)
             return -1;
         if (p_map->map[map_y][map_x] == '1')
         {
@@ -100,14 +100,14 @@ double get_vertical(t_map *p_map, double ray_angle)
         x_inter += TILE_SIZE;
     y_inter = player_y + (x_inter - player_x) * tan(ray_angle);
 
-    while (x_inter >= 0 && x_inter < p_map->map_width && y_inter >= 0 && y_inter < p_map->map_height)
+    while (x_inter >= 0 && x_inter <( p_map->map_width * TILE_SIZE) && y_inter >= 0 && y_inter <( p_map->map_height * TILE_SIZE))
     {
         int map_x = floor(x_inter / TILE_SIZE);
         if (rayfacingleft)
             map_x -= 1;
         int map_y = floor(y_inter / TILE_SIZE);
 
-        if (map_y >= ft_count(p_map->map) || map_y < 0 || map_x < 0 || (size_t)map_x >= ft_strlen(p_map->map[map_y]))
+        if (map_y < 0 || map_x < 0 || map_y >= p_map->map_height || map_x >= p_map->map_width)
             return -1;
 
         if (p_map->map[map_y][map_x] == '1')
@@ -217,4 +217,5 @@ void raycasting(t_map *p_map)
         ray_angle += angle_increment;
         i++;
     }
+    draw_minimap(p_map, p_map->minimap);
 }

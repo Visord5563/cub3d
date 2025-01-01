@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/01 08:22:29 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/01 19:11:23 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 #define FOV 60
 #define TILE_SIZE 30
 #define DIST_PROJ_PLANE (WIDTH / (2 * tan((FOV * M_PI / 180) / 2)))
+#define PLAYER_SIZE (TILE_SIZE / 3)
 
 
 typedef struct s_color
@@ -92,6 +93,7 @@ typedef struct s_map
 	mlx_texture_t *textures[4];
 	int map_width;
 	int map_height;
+	mlx_image_t* minimap;
 } t_map;
 
 
@@ -123,10 +125,10 @@ void	get_posplayer(t_map *p_map, int i, int j);
 // part exucution
 
 void	map_render(t_map *p_map);
-void	minimap(t_map *p_map, mlx_t* mlx);
+void	ft_minimap(t_map *p_map);
 int		get_rgba(int r, int g, int b, int a);
 int		get_cell_color(t_map *p_map, int x, int y);
 void	move_player(t_map *p_map);
 // raycasting
 void raycasting(t_map *p_map);
-
+void draw_minimap(t_map *p_map, mlx_image_t* img);
