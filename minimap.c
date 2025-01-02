@@ -24,11 +24,11 @@ void render_player(t_map *p_map, int x1, int y1)
     player_width = p_map->cell_width / 2;
     player_height = p_map->cell_height / 2;
 
-    // Calculate the player's position on the minimap relative to its viewport
-    player_x = (x1 * p_map->cell_width);
-    player_y = (y1 * p_map->cell_height);
+    player_x = (x1 * p_map->cell_width) + (fmod(p_map->player.x_double, TILE_SIZE) / TILE_SIZE * p_map->cell_width) / 2;
+    player_y = (y1 * p_map->cell_height) + (fmod(p_map->player.y_double, TILE_SIZE) / TILE_SIZE * p_map->cell_height) / 2;
 
-    if (p_map->player.player) {
+    if (p_map->player.player)
+	{
         mlx_delete_image(p_map->mlx, p_map->player.player);
     }
 
@@ -134,7 +134,6 @@ void draw_minimap(t_map *p_map, mlx_image_t* img)
 		}
 		y_top++;
 	}
-	// render_player(p_map);
 	return ;
 }
 
