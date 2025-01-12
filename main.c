@@ -6,16 +6,13 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:37 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/01 16:35:12 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/12 00:11:08 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void f()
-{
-	system("leaks cub3D");
-}
+
 
 void check_newline(char *map_oned, t_map *map)
 {
@@ -165,7 +162,7 @@ int main(int argc, char **argv)
 	parse_map(p_map);
 	get_width_height(p_map);
 	ft_realloc(p_map);
-	
+
 	map_render(p_map);
 }
 

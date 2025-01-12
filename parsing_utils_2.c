@@ -6,15 +6,28 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 02:04:36 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/01 17:47:39 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/11 00:57:52 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void init_map(t_map **p_map)
+void	init_textures(t_map *map)
 {
-	t_map *map;
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (map->textures[i])
+			map->textures[i] = NULL;
+		i++;
+	}
+}
+
+void	init_map(t_map **p_map)
+{
+	t_map	*map;
 
 	map = malloc(sizeof(t_map));
 	if (!map)
@@ -30,11 +43,29 @@ void init_map(t_map **p_map)
 	map->we = NULL;
 	map->ea = NULL;
 	map->map = NULL;
+	map->map_img = NULL;
+	map->minimap = NULL;
+	map->mlx = NULL;
+	map->player.player = NULL;
 	map->fd = -1;
+	init_textures(map);
 	*p_map = map;
 }
 
-void free_map(t_map *map)
+void	delete_textures(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (map->textures[i])
+			mlx_delete_texture(map->textures[i]);
+		i++;
+	}
+}
+
+void	free_map(t_map *map)
 {
 	if (map->no)
 		free(map->no);
@@ -54,31 +85,22 @@ void free_map(t_map *map)
 		mlx_delete_image(map->mlx, map->player.player);
 	if (map->mlx)
 		mlx_terminate(map->mlx);
-	if (map->textures[0])
-		mlx_delete_texture(map->textures[0]);
-	if (map->textures[1])
-		mlx_delete_texture(map->textures[1]);
-	if (map->textures[2])
-		mlx_delete_texture(map->textures[2]);
-	if (map->textures[3])
-		mlx_delete_texture(map->textures[3]);
+	delete_textures(map);
 	free(map);
 }
 
-void get_posplayer(t_map *p_map, int i, int j)
+void	get_posplayer(t_map *p_map, int y, int x)
 {
-	if (p_map->map[i][j] == 'N')
+	if (p_map->map[y][x] == 'N')
 		p_map->player.rot_angle = 3 * M_PI / 2;
-	if (p_map->map[i][j] == 'S')
+	if (p_map->map[y][x] == 'S')
 		p_map->player.rot_angle = M_PI / 2;
-	if (p_map->map[i][j] == 'W')
+	if (p_map->map[y][x] == 'W')
 		p_map->player.rot_angle = M_PI;
-	if (p_map->map[i][j] == 'E')
+	if (p_map->map[y][x] == 'E')
 		p_map->player.rot_angle = 0;
-	p_map->player.x = j;
-	p_map->player.y = i;
-	p_map->player.y_double = p_map->player.y * TILE_SIZE + TILE_SIZE / 2.0;
-    p_map->player.x_double = p_map->player.x * TILE_SIZE + TILE_SIZE / 2.0;
+	p_map->player.y_double = y * TILE_SIZE + TILE_SIZE / 2.0;
+	p_map->player.x_double = x * TILE_SIZE + TILE_SIZE / 2.0;
 	p_map->player.walk_dir = 0;
 	p_map->player.walk_side = 0;
 	p_map->player.turn_dir = 0;
@@ -86,21 +108,4 @@ void get_posplayer(t_map *p_map, int i, int j)
 	p_map->player.turn_speed = 6 * (M_PI / 180);
 	p_map->x_inter = -1;
 	p_map->y_inter = -1;
-}
-
-int get_rgba(int r, int g, int b, int a)
-{
-    return (r << 24 | g << 16 | b << 8 | a);
-}
-
-int get_cell_color(t_map *p_map, int x, int y)
-{
-    int color;
-
-    if (p_map->map[y][x] == '1')
-        color = get_rgba(255, 255, 255, 255);
-    else
-        color = get_rgba(0, 0, 0, 100);
-
-    return color;
 }

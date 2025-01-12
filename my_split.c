@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 08:52:15 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/08 09:55:07 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/11 01:17:56 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,15 @@
 static const char	*skip_separator(const char *p, char *c)
 {
 	while (*p && ft_strchr(c, *p))
-		p++;	
+		p++;
 	return (p);
 }
 
 static int	rows(const char *s, char *c)
 {
 	int	nblignes;
-	// int	i;
 
 	nblignes = 0;
-	// i = 0;
 	while (*s)
 	{
 		s = skip_separator(s, c);

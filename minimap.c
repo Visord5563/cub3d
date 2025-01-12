@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:54:27 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/01 19:06:29 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/12 01:17:38 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,33 @@
 
 void render_player(t_map *p_map, int x1, int y1)
 {
-    mlx_image_t *player;
-    int player_width;
-    int player_height;
-    int player_x;
-    int player_y;
-    int x, y;
+	int			player_width;
+	int			player_height;
+	int			player_x;
+	int			player_y;
+	int			x;
+	int			y;
 
-    player_width = p_map->cell_width / 2;
-    player_height = p_map->cell_height / 2;
-
-    player_x = (x1 * p_map->cell_width) + (fmod(p_map->player.x_double, TILE_SIZE) / TILE_SIZE * p_map->cell_width) / 2;
-    player_y = (y1 * p_map->cell_height) + (fmod(p_map->player.y_double, TILE_SIZE) / TILE_SIZE * p_map->cell_height) / 2;
-
-    if (p_map->player.player)
+	player_width = p_map->cell_width / 2;
+	player_height = p_map->cell_height / 2;
+	player_x = (x1 * p_map->cell_width)
+		+ (fmod(p_map->player.x_double, TILE_SIZE) / TILE_SIZE * p_map->cell_width) / 2;
+	player_y = (y1 * p_map->cell_height) + (fmod(p_map->player.y_double, TILE_SIZE) / TILE_SIZE * p_map->cell_height) / 2;
+	y = (y1 * p_map->cell_height);
+	while (y < (y1 * p_map->cell_height) + p_map->cell_height)
 	{
-        mlx_delete_image(p_map->mlx, p_map->player.player);
-    }
-
-    player = mlx_new_image(p_map->mlx, player_width, player_height);
-    if (!player || mlx_image_to_window(p_map->mlx, player, player_x, player_y) < 0) {
-        printf("Error\n");
-        free_map(p_map);
-        exit(1);
-    }
-
-    y = 0;
-    while (y < player_height) {
-        x = 0;
-        while (x < player_width) {
-            mlx_put_pixel(player, x, y, get_rgba(241, 196, 15, 255));
-            x++;
-        }
-        y++;
-    }
-
-    p_map->player.player = player;
+		x = (x1 * p_map->cell_width);
+		while (x < (x1 * p_map->cell_width) + p_map->cell_width)
+		{
+			if (x >= player_x && x < player_x + player_width
+				&& y >= player_y && y < player_y + player_height)
+				mlx_put_pixel(p_map->minimap, x, y, get_rgba(241, 196, 15, 255));
+			else
+				mlx_put_pixel(p_map->minimap, x, y, get_rgba(0, 0, 0, 100));
+			x++;
+		}
+		y++;
+	}
 }
 
 
@@ -62,7 +53,7 @@ void draw_minimap_cell(t_map *p_map, mlx_image_t*img, int x, int y, int x_px, in
 	int y_pixel;
 
 	if (x == (int)(p_map->player.x_double / TILE_SIZE) && y == (int)(p_map->player.y_double / TILE_SIZE))
-		render_player(p_map, x_px, y_px);
+		return (render_player(p_map, x_px, y_px), (void)0);
 	color = get_cell_color(p_map, x, y);
 	y_map =0;
 	while (y_map < p_map->cell_height)
@@ -137,10 +128,11 @@ void draw_minimap(t_map *p_map, mlx_image_t* img)
 	return ;
 }
 
-void ft_minimap(t_map *p_map)
+void	ft_minimap(t_map *p_map)
 {
 	p_map->minimap = mlx_new_image(p_map->mlx, M_WIDTH, M_HEIGHT);
-	if (!p_map->minimap || (mlx_image_to_window(p_map->mlx, p_map->minimap, 0, 0) < 0))
+	if (!p_map->minimap
+		|| (mlx_image_to_window(p_map->mlx, p_map->minimap, 0, 0) < 0))
 	{
 		printf("Error\n");
 		free_map(p_map);

@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/01 19:11:23 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/11 01:54:22 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ typedef struct s_color
 typedef struct s_player
 {
 	mlx_image_t*	player;
-	int x;
-	int y;
 	double x_double;
 	double y_double;
 	double rot_angle;
@@ -118,7 +116,7 @@ int		skip_line_empty(char *line);
 char	*skip_space(char *line);
 void	init_map(t_map **p_map);
 void	free_map(t_map *map);
-void		parse_map(t_map *p_map);
+void	parse_map(t_map *p_map);
 int		check_namnf(t_map *p_map, char *av);
 void	get_posplayer(t_map *p_map, int i, int j);
 
@@ -130,5 +128,11 @@ int		get_rgba(int r, int g, int b, int a);
 int		get_cell_color(t_map *p_map, int x, int y);
 void	move_player(t_map *p_map);
 // raycasting
-void raycasting(t_map *p_map);
-void draw_minimap(t_map *p_map, mlx_image_t* img);
+void			raycasting(t_map *p_map);
+void			draw_minimap(t_map *p_map, mlx_image_t	*img);
+void			_texters(double yp, int *colors, mlx_texture_t *texture , t_map *p_map);
+mlx_texture_t	*ft_whiche_texture( mlx_texture_t *texture[4],
+					double ray_angle, int side);
+void			key_release(t_map *p_map);
+void			close_win(void *param);
+int				hit_wall(t_map *p_map, double x, double y);

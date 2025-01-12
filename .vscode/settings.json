@@ -64,6 +64,8 @@
     "string": "c",
     "type_traits": "c",
     "complex": "c",
-    "__node_handle": "c"
-  }
+    "__node_handle": "c",
+    "cub3d.h": "c"
+  },
+  "cmake.sourceDirectory": "/Users/relamine/Desktop/cub3d/MLX42"
 }

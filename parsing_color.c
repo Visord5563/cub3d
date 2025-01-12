@@ -6,15 +6,15 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 05:41:43 by relamine          #+#    #+#             */
-/*   Updated: 2024/12/09 02:19:31 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/11 01:19:23 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int comma_countre(char *line)
+int	comma_countre(char *line)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (line && line[0] == ',')
@@ -23,7 +23,7 @@ int comma_countre(char *line)
 	{
 		if (*line == ',')
 		{
-			if(*(line + 1) == ',')
+			if (*(line + 1) == ',')
 				return (0);
 			count++;
 		}
@@ -34,11 +34,11 @@ int comma_countre(char *line)
 	return (1);
 }
 
-int check_color(char **colors)
+int	check_color(char **colors)
 {
-	int i;
-	int j;
-	char *color;
+	int		i;
+	int		j;
+	char	*color;
 
 	i = 0;
 	while (colors[i])
@@ -63,9 +63,9 @@ int check_color(char **colors)
 	return (1);
 }
 
-int colors_handler(char *line, t_color *color)
+int	colors_handler(char *line, t_color *color)
 {
-	char **colors;
+	char	**colors;
 
 	line++;
 	if (!comma_countre(line))
@@ -81,9 +81,9 @@ int colors_handler(char *line, t_color *color)
 	return (ft_free(colors), 1);
 }
 
-int parsing_color(char *line, t_map *map)
+int	parsing_color(char *line, t_map *map)
 {
-	line =  skip_space(line);
+	line = skip_space(line);
 	if (*line == 'F')
 	{
 		if (map->f.r != -1 || !colors_handler(line, &map->f))

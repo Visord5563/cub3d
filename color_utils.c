@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   color_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/08 22:55:01 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/11 01:58:08 by relamine         ###   ########.fr       */
+/*   Created: 2025/01/11 00:47:31 by relamine          #+#    #+#             */
+/*   Updated: 2025/01/11 00:51:34 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	get_rgba(int r, int g, int b, int a)
 {
-	size_t	i;
+	return (r << 24 | g << 16 | b << 8 | a);
+}
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-	{
-		i++;
-	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+int	get_cell_color(t_map *p_map, int x, int y)
+{
+	int	color;
+
+	if (p_map->map[y][x] == '1')
+		color = get_rgba(255, 255, 255, 255);
+	else
+		color = get_rgba(0, 0, 0, 100);
+	return (color);
 }

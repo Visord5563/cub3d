@@ -6,7 +6,7 @@
 #    By: relamine <relamine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/03 17:08:07 by saharchi          #+#    #+#              #
-#    Updated: 2025/01/01 12:02:35 by relamine         ###   ########.fr        #
+#    Updated: 2025/01/11 01:54:48 by relamine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast #-g -fsanitize=address
 RM = rm -f
 
 SRC = main.c get_next_line.c get_next_line_utils.c my_split.c parsing_color.c parsing_map.c  parsing_texture.c parsing_utils.c parsing_utils_2.c \
-		minimap.c map.c player_move.c raycasting.c
+		minimap.c map.c player_move.c raycasting.c texture.c color_utils.c player_move_utils.c
 
 OBJ = $(SRC:%.c=%.o)
 LIBMLX := ./MLX42
