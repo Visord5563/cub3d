@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: relamine <relamine@student.42.fr>          +#+  +:+       +#+         #
+#    By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/03 17:08:07 by saharchi          #+#    #+#              #
-#    Updated: 2025/01/11 01:54:48 by relamine         ###   ########.fr        #
+#    Updated: 2025/01/15 05:50:45 by saharchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ $(LIBFT): ./libft/*.c ./libft/libft.h
 	make -C ./libft/
 
 $(NAME): $(OBJ) $(LIBFT)
-	cc $(CFLAGS)  $(OBJ) $(LIBFT) $(LIBS)  -o $(NAME)
+	cc $(CFLAGS) -framework Cocoa -framework OpenGL -framework IOKit ./MLX42/build/libmlx42.a  $(OBJ) $(LIBFT) -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"  -o $(NAME)
 
 %.o: %.c  
 	cc $(CFLAGS) -c $< -o $@

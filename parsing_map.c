@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:47:41 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/30 10:53:16 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/15 05:49:01 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int check_player(char map)
 
 int valid_element(char map)
 {
-	if (map != '1' && map != '0' && !is_space(map) && !check_player(map))
+	if (map != '1' && map != '0' && !is_space(map) && !check_player(map) && map != 'D')
 	{
 		printf("Error\n");
 		exit(1);
@@ -100,6 +100,27 @@ void valid_line(char **line, int i, t_map *p_map, int *cou)
 			printf("Error\n");
 			free_map(p_map);
 			exit(1);
+		}
+		if (line[i][j] == 'D')
+		{
+			if (check_space(line, i, j) || j >= (int)ft_strlen(line[i - 1]) || j >= (int)ft_strlen(line[i + 1]))
+			{
+				printf("Error\n");
+				free_map(p_map);
+				exit(1);
+			}
+			if ((line[i][j + 1] != '1' && line[i][j - 1] != '1') && (line[i - 1][j] != '1' && line[i + 1][j] != '1'))
+			{
+				printf("Error\n");
+				free_map(p_map);
+				exit(1);
+			}
+			if (line[i][j + 1] == '1' && line[i][j - 1] == '1' && line[i - 1][j] == '1' && line[i + 1][j] == '1')
+			{
+				printf("Error\n");
+				free_map(p_map);
+				exit(1);
+			}
 		}
 		j++;
 	}
