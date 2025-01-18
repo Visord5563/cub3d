@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 07:05:59 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/18 08:40:54 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/18 09:38:13 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ void	draw_minimap_row(t_map *p_map, t_minimap_vars vars)
 {
 	vars.x_left = vars.player_x - (p_map->minimap.base_width / 2);
 	vars.x_right = vars.x_left + p_map->minimap.base_width;
-	if (vars.x_left < 0)
+	if (vars.x_left <= 0)
 	{
 		vars.x_left = 0;
 		vars.x_right = p_map->minimap.base_width;
 	}
-	if (vars.x_right > p_map->map_width)
+	if (vars.x_right >= p_map->map_width)
 	{
 		vars.x_right = p_map->map_width;
 		vars.x_left = vars.x_right - p_map->minimap.base_width;
