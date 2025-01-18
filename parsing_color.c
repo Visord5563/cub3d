@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 05:41:43 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/11 01:19:23 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:12:11 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	colors_handler(char *line, t_color *color)
 	if (!comma_countre(line))
 		return (0);
 	colors = my_split(line, ",\t\v\f\r\n ");
+	if (ft_count(colors) != 3)
+		return (ft_free(colors), 0);
 	if (!colors)
 		return (0);
 	if (!check_color(colors))
@@ -81,18 +83,20 @@ int	colors_handler(char *line, t_color *color)
 	return (ft_free(colors), 1);
 }
 
-int	parsing_color(char *line, t_map *map)
+int	parsing_color(char *line, t_map *map, int *counter)
 {
 	line = skip_space(line);
 	if (*line == 'F')
 	{
 		if (map->f.r != -1 || !colors_handler(line, &map->f))
 			return (0);
+		(*counter)++;
 	}
 	else if (*line == 'C')
 	{
 		if (map->c.r != -1 || !colors_handler(line, &map->c))
 			return (0);
+		(*counter)++;
 	}
 	else
 		return (2);

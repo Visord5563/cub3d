@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/18 09:35:54 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:40:30 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 #include "libft/libft.h"
 #include "./MLX42/include/MLX42/MLX42.h"
 
-
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 145
 #endif
@@ -35,13 +34,10 @@
 #define M_HEIGHT (HEIGHT / 4)
 #define MOVE_MAP 10
 
-
 #define FOV 60
 #define TILE_SIZE 30
 #define DIST_PROJ_PLANE (WIDTH / (2 * tan((FOV * M_PI / 180) / 2)))
 #define PLAYER_SIZE (TILE_SIZE / 3)
-
-
 
 typedef struct s_color
 {
@@ -49,7 +45,6 @@ typedef struct s_color
 	int	g;
 	int	b;
 }	t_color;
-
 
 typedef struct s_player
 {
@@ -114,17 +109,17 @@ typedef struct s_map
 	char			*so;
 	char			*we;
 	char			*ea;
+	char			*d;
 	t_color			f;
 	t_color			c;
 	t_player		player;
 	t_minimap		minimap;
 	mlx_t			*mlx;
 	mlx_image_t		*map_img;
-	mlx_texture_t	*textures[4];
+	mlx_texture_t	*textures[5];
 	int				map_width;
 	int				map_height;
 }	t_map;
-
 
 char			*get_next_line(int fd);
 char			*ft_strjoin(char const *s1, char const *s2);
@@ -134,8 +129,11 @@ int				ft_strchr2( char *s);
 char			**my_split(char const *s, char *c);
 int				ft_strcmp(const char *s1, const char *s2);
 void			ft_free(char **str);
-int				parsing_color(char *line, t_map *map);
-int				parsing_texture(char *line, t_map *map, int counter);
+int				parsing_color(char *line, t_map *map, int *counter);
+int				process_map_lines(t_map *p_map,
+					int status, int is_map, int counter);
+int				parsing_texture(char *line, t_map *map, int *counter);
+void			check_newline(char *map_oned, t_map *map);
 int				ft_count(char **str);
 int				is_texture_valid(t_map *map);
 int				skip_line_empty(char *line);

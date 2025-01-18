@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 02:04:36 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/18 06:40:12 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:38:12 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_map(t_map **p_map)
 	map->so = NULL;
 	map->we = NULL;
 	map->ea = NULL;
+	map->d = NULL;
 	map->map = NULL;
 	map->map_img = NULL;
 	map->minimap.img = NULL;
@@ -75,6 +76,8 @@ void	free_map(t_map *map)
 		free(map->we);
 	if (map->ea)
 		free(map->ea);
+	if (map->d)
+		free(map->d);
 	if (map->map)
 		ft_free(map->map);
 	if (map->fd != -1)
