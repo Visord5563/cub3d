@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/11 01:54:22 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/18 07:11:49 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 #define HEIGHT 1000
 #define M_WIDTH (WIDTH / 4)
 #define M_HEIGHT (HEIGHT / 4)
+#define MOVE_MAP 10
 
 // raycasting
 #define FOV 60
@@ -54,30 +55,62 @@ typedef struct s_color
 
 typedef struct s_player
 {
-	mlx_image_t*	player;
+	mlx_image_t *img;
+	int width;
+	int height;
 	double x_double;
 	double y_double;
 	double rot_angle;
-	int walk_dir; // -1 for back, 1 for front
-	int walk_side; // -1 for move left, 1 for right
-	int turn_dir; // -1 for left, 1 for right
+	int walk_dir;
+	int walk_side;
+	int turn_dir;
 	double walk_speed;
 	double turn_speed;
 } t_player;
 
 typedef struct s_ray
 {
-	float angle;
-	float dist;
-} t_ray;
+	float	angle;
+	float	dist;
+}	t_ray;
+
+typedef struct s_dir
+{
+	float	angle;
+	float	dx;
+	float	dy;
+	float	length;
+	float	x_increment;
+	float	y_increment;
+	int		step_count;
+}	t_dir;
+
+typedef struct s_minimap_vars
+{
+	int	y_top;
+	int	y_bottom;
+	int	x_right;
+	int	x_left;
+	int	x_scale;
+	int	y_scale;
+	int	player_x;
+	int	player_y;
+}	t_minimap_vars;
+
+typedef struct s_minimap
+{
+	mlx_image_t	*img;
+	int			cell_w;
+	int			cell_h;
+	int			base_height;
+	int			base_width;
+}	t_minimap;
 
 typedef struct s_map
 {
     char **map;
 	double x_inter;
 	double y_inter;
-	int	cell_width;
-	int	cell_height;
     int fd;
 	char *no;
 	char *so;
@@ -86,12 +119,12 @@ typedef struct s_map
 	t_color f;
 	t_color c;
 	t_player player;
+	t_minimap minimap;
 	mlx_t* mlx;
 	mlx_image_t* map_img;
 	mlx_texture_t *textures[4];
 	int map_width;
 	int map_height;
-	mlx_image_t* minimap;
 } t_map;
 
 
@@ -129,10 +162,11 @@ int		get_cell_color(t_map *p_map, int x, int y);
 void	move_player(t_map *p_map);
 // raycasting
 void			raycasting(t_map *p_map);
-void			draw_minimap(t_map *p_map, mlx_image_t	*img);
+void			draw_minimap(t_map *p_map);
 void			_texters(double yp, int *colors, mlx_texture_t *texture , t_map *p_map);
 mlx_texture_t	*ft_whiche_texture( mlx_texture_t *texture[4],
 					double ray_angle, int side);
 void			key_release(t_map *p_map);
 void			close_win(void *param);
 int				hit_wall(t_map *p_map, double x, double y);
+void	draw_ray_with_angle(float x0, float y0, t_map *p_map);

@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 17:35:21 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/10 23:32:27 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/18 05:53:55 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,5 +179,5 @@ void raycasting(t_map *p_map)
         ray_angle += angle_increment;
         i++;
     }
-    draw_minimap(p_map, p_map->minimap);
+    draw_minimap(p_map);
 }

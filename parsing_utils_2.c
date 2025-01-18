@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 02:04:36 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/11 00:57:52 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/18 06:40:12 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	init_map(t_map **p_map)
 	map->ea = NULL;
 	map->map = NULL;
 	map->map_img = NULL;
-	map->minimap = NULL;
+	map->minimap.img = NULL;
+	map->player.img = NULL;
 	map->mlx = NULL;
-	map->player.player = NULL;
 	map->fd = -1;
 	init_textures(map);
 	*p_map = map;
@@ -81,8 +81,10 @@ void	free_map(t_map *map)
 		close(map->fd);
 	if (map->map_img)
 		mlx_delete_image(map->mlx, map->map_img);
-	if (map->player.player)
-		mlx_delete_image(map->mlx, map->player.player);
+	if (map->minimap.img)
+		mlx_delete_image(map->mlx, map->minimap.img);
+	if (map->player.img)
+		mlx_delete_image(map->mlx, map->player.img);
 	if (map->mlx)
 		mlx_terminate(map->mlx);
 	delete_textures(map);

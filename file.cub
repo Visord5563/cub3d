@@ -2,7 +2,6 @@ NO ./texture/1.png
 SO ./texture/2.png
 WE ./texture/3.png
 EA ./texture/4.png
-D ./texture/5.png
 F 135,206,235
 C 170,150,100
 
