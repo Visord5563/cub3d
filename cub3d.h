@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/18 11:40:30 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/19 13:04:15 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,3 +158,5 @@ void			key_release(t_map *p_map);
 void			close_win(void *param);
 int				hit_wall(t_map *p_map, double x, double y);
 void			draw_ray_with_angle(float x0, float y0, t_map *p_map);
+void			free_map_textures(t_map *map);
+int				is_texture_valid(t_map *map);

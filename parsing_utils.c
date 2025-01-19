@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 09:41:29 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/11 01:14:56 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/19 13:04:03 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,6 @@ int	ft_strcmp(const char *s1, const char *s2)
 	while (st1[i] != '\0' && st2[i] != '\0' && st1[i] == st2[i])
 		i++;
 	return (st1[i] - st2[i]);
-}
-
-void	ft_free(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
 }
 
 int	ft_count(char **str)
@@ -67,4 +54,21 @@ char	*skip_space(char *line)
 		|| *line == '\f' || *line == '\r')
 		line++;
 	return (line);
+}
+
+int	is_texture_valid(t_map *map)
+{
+	map->textures[0] = mlx_load_png(map->no);
+	if (!map->textures[0])
+		return (0);
+	map->textures[1] = mlx_load_png(map->so);
+	if (!map->textures[1])
+		return (0);
+	map->textures[2] = mlx_load_png(map->we);
+	if (!map->textures[2])
+		return (0);
+	map->textures[3] = mlx_load_png(map->ea);
+	if (!map->textures[3])
+		return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:37 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/18 12:12:51 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/19 13:07:44 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int	main(int argc, char **argv)
 	if (process_map_lines(p_map, 0, 0, 0))
 		return (1);
 	parse_map(p_map);
+	free_map_textures(p_map);
 	map_render(p_map);
 }

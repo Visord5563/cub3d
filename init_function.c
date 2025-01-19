@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils_2.c                                  :+:      :+:    :+:   */
+/*   init_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 02:04:36 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/18 10:38:12 by relamine         ###   ########.fr       */
+/*   Created: 2025/01/19 12:24:37 by relamine          #+#    #+#             */
+/*   Updated: 2025/01/19 13:06:53 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,47 +51,6 @@ void	init_map(t_map **p_map)
 	map->fd = -1;
 	init_textures(map);
 	*p_map = map;
-}
-
-void	delete_textures(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		if (map->textures[i])
-			mlx_delete_texture(map->textures[i]);
-		i++;
-	}
-}
-
-void	free_map(t_map *map)
-{
-	if (map->no)
-		free(map->no);
-	if (map->so)
-		free(map->so);
-	if (map->we)
-		free(map->we);
-	if (map->ea)
-		free(map->ea);
-	if (map->d)
-		free(map->d);
-	if (map->map)
-		ft_free(map->map);
-	if (map->fd != -1)
-		close(map->fd);
-	if (map->map_img)
-		mlx_delete_image(map->mlx, map->map_img);
-	if (map->minimap.img)
-		mlx_delete_image(map->mlx, map->minimap.img);
-	if (map->player.img)
-		mlx_delete_image(map->mlx, map->player.img);
-	if (map->mlx)
-		mlx_terminate(map->mlx);
-	delete_textures(map);
-	free(map);
 }
 
 void	get_posplayer(t_map *p_map, int y, int x)

@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 10:09:38 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/18 12:05:41 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/19 13:02:38 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	process_map_oned(char *map_oned, t_map *p_map, int counter)
 	return (0);
 }
 
-int	append_line_to_map(char **map_oned, char **line, t_map *p_map, int *is_map)
+void	append_line_to_map(char **map_oned,
+			char **line, t_map *p_map, int *is_map)
 {
 	*map_oned = ft_strjoin(*map_oned, *line);
 	if (!(*map_oned))
@@ -42,7 +43,6 @@ int	append_line_to_map(char **map_oned, char **line, t_map *p_map, int *is_map)
 	free(*line);
 	*line = get_next_line(p_map->fd);
 	*is_map = 1;
-	return (0);
 }
 
 int	handle_empty_line(char **line, int is_map, t_map *p_map)

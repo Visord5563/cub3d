@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:32:06 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/10 23:55:34 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/19 13:05:54 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	_texters(double yp, int *colors, mlx_texture_t	*texture, t_map *p_map)
 	colors[3] = texture->pixels[pixel_index + 3];
 }
 
-mlx_texture_t	*ft_whiche_texture( mlx_texture_t *texture[4],
+mlx_texture_t	*ft_whiche_texture( mlx_texture_t *texture[5],
 	double ray_angle, int side)
 {
 	if (ray_angle > 0 && ray_angle < M_PI && side == 1)

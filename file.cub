@@ -1,11 +1,10 @@
 NO ./texture/1.png
 SO ./texture/2.png
 WE ./texture/3.png
-EA ./texture/4.png
 D ./texture/5.png
+EA ./texture/4.png
 F 135,206,235
 C 170,150,100
-
 
         111111111111111111111111111
         100000000011000000000000111
