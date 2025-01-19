@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:47:41 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/18 12:14:59 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/18 10:02:38 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
@@ -76,54 +77,66 @@ int valid_element(char map)
 	return (1);
 }
 
-void valid_line(char **line, int i, t_map *p_map, int *cou)
+void check_and_exit(char **line, int i, int j, t_map *p_map)
 {
-	int j = 0;
-	while(is_space(line[i][j]))
-		j++;
-	while(line[i][j] && valid_element(line[i][j]))
+    if (check_space(line, i, j) || j >= (int)ft_strlen(line[i - 1]) || j >= (int)ft_strlen(line[i + 1]))
+    {
+        printf("Error\n");
+        free_map(p_map);
+        exit(1);
+    }
+}
+
+void check_player_position(char **line, int i, int j, t_map *p_map, int *cou)
+{
+    (*cou)++;
+    check_and_exit(line, i, j, p_map);
+    get_posplayer(p_map, i, j);
+}
+
+void check_d_position(char **line, int i, int j, t_map *p_map)
+{
+    check_and_exit(line, i, j, p_map);
+    if ((line[i][j + 1] == '1' && line[i][j - 1] == '1') || (line[i - 1][j] == '1' && line[i + 1][j] == '1'))
 	{
-		if (check_player(line[i][j]))
-		{
-			(*cou)++;
-			if (check_space(line, i, j) || j >= (int)ft_strlen(line[i - 1]) || j >= (int)ft_strlen(line[i + 1]))
-			{
-				printf("Error\n");
-				free_map(p_map);
-				exit(1);
-			}
-			get_posplayer(p_map, i, j);
-		}
-		if (line[i][j] == '0' && (check_space(line, i, j) || j >= (int)ft_strlen(line[i - 1]) || j >= (int)ft_strlen(line[i + 1])))
+		if (line[i][j + 1] == '1' && line[i][j - 1] == '1' && (line[i - 1][j] == '1' || line[i + 1][j] == '1'))
 		{
 			printf("Error\n");
 			free_map(p_map);
 			exit(1);
 		}
-		if (line[i][j] == 'D')
+		if (line[i - 1][j] == '1' && line[i + 1][j] == '1' && (line[i][j - 1] == '1' || line[i][j + 1] == '1'))
 		{
-			if (check_space(line, i, j) || j >= (int)ft_strlen(line[i - 1]) || j >= (int)ft_strlen(line[i + 1]))
-			{
-				printf("Error\n");
-				free_map(p_map);
-				exit(1);
-			}
-			if ((line[i][j + 1] != '1' && line[i][j - 1] != '1') && (line[i - 1][j] != '1' && line[i + 1][j] != '1'))
-			{
-				printf("Error\n");
-				free_map(p_map);
-				exit(1);
-			}
-			if (line[i][j + 1] == '1' && line[i][j - 1] == '1' && line[i - 1][j] == '1' && line[i + 1][j] == '1')
-			{
-				printf("Error\n");
-				free_map(p_map);
-				exit(1);
-			}
+			printf("Error\n");
+			free_map(p_map);
+			exit(1);
 		}
-		j++;
 	}
+    else 
+	{
+        printf("Error\n");
+        free_map(p_map);
+        exit(1);
+    }
 }
+
+void valid_line(char **line, int i, t_map *p_map, int *cou)
+{
+    int j = 0;
+    while (is_space(line[i][j]))
+        j++;
+    while (line[i][j] && valid_element(line[i][j]))
+    {
+        if (check_player(line[i][j]))
+            check_player_position(line, i, j, p_map, cou);
+        else if (line[i][j] == '0')
+            check_and_exit(line, i, j, p_map);
+        else if (line[i][j] == 'D')
+            check_d_position(line, i, j, p_map);
+        j++;
+    }
+}
+
 
 void parse_map(t_map *p_map)
 {
