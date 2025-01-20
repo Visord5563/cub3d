@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 12:24:37 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/19 13:06:53 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/20 01:35:57 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,12 @@ void	get_posplayer(t_map *p_map, int y, int x)
 	p_map->player.walk_dir = 0;
 	p_map->player.walk_side = 0;
 	p_map->player.turn_dir = 0;
-	p_map->player.walk_speed = 6.0;
+	p_map->player.walk_speed = PLAYER_SIZE;
+	if (p_map->player.walk_speed > TILE_SIZE)
+		p_map->player.walk_speed = 5;
 	p_map->player.turn_speed = 6 * (M_PI / 180);
 	p_map->x_inter = -1;
 	p_map->y_inter = -1;
+	p_map->door.is_open = 0;
+	p_map->door.inside_door = 0;
 }

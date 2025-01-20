@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/19 13:04:15 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/20 01:35:13 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,14 @@ typedef struct s_dir
 	int		step_count;
 }	t_dir;
 
+typedef struct s_door
+{
+	int is_open;
+	int inside_door;
+	int is_dor_v;
+	int is_dor_h;
+}	t_door;
+
 typedef struct s_minimap_vars
 {
 	int	y_top;
@@ -119,6 +127,7 @@ typedef struct s_map
 	mlx_texture_t	*textures[5];
 	int				map_width;
 	int				map_height;
+	t_door			door;
 }	t_map;
 
 char			*get_next_line(int fd);
@@ -156,7 +165,7 @@ mlx_texture_t	*ft_whiche_texture( mlx_texture_t *texture[4],
 					double ray_angle, int side);
 void			key_release(t_map *p_map);
 void			close_win(void *param);
-int				hit_wall(t_map *p_map, double x, double y);
+int				hit_wall(t_map *p_map, double x, double y, int key_use);
 void			draw_ray_with_angle(float x0, float y0, t_map *p_map);
 void			free_map_textures(t_map *map);
 int				is_texture_valid(t_map *map);

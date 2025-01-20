@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:54:27 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/18 09:01:37 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/20 00:23:29 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	draw_ray_with_angle(float x0, float y0, t_map *p_map)
 	ray.angle = fmod(p_map->player.rot_angle, 2 * M_PI);
 	if (ray.angle < 0)
 		ray.angle += 2 * M_PI;
-	ray.dx = cos(ray.angle) * 10;
-	ray.dy = sin(ray.angle) * 10;
+	ray.dx = cos(ray.angle) * fmax(p_map->player.width, p_map->player.height);
+	ray.dy = sin(ray.angle) * fmax(p_map->player.width, p_map->player.height);
 	ray.length = fmax(fabs(ray.dx), fabs(ray.dy));
 	ray.x_increment = ray.dx / ray.length;
 	ray.y_increment = ray.dy / ray.length;

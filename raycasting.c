@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 17:35:21 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/18 09:38:43 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/19 21:44:26 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ double get_horizontal(t_map *p_map, double ray_angle)
         
         if (map_y < 0 || map_x < 0 || map_y >= p_map->map_height || map_x >= p_map->map_width)
             return -1;
-        if (p_map->map[map_y][map_x] == '1')
+        if (p_map->map[map_y][map_x] == '1' || p_map->map[map_y][map_x] == 'D')
         {
+            if (p_map->map[map_y][map_x] == 'D')
+                p_map->door.is_dor_h = 1;
             p_map->x_inter = x_inter;
             return sqrt(pow(x_inter - player_x, 2) + pow(y_inter - player_y, 2));
         }
@@ -110,8 +112,10 @@ double get_vertical(t_map *p_map, double ray_angle)
         if (map_y < 0 || map_x < 0 || map_y >= p_map->map_height || map_x >= p_map->map_width)
             return -1;
 
-        if (p_map->map[map_y][map_x] == '1')
+        if (p_map->map[map_y][map_x] == '1' || p_map->map[map_y][map_x] == 'D')
         {
+            if (p_map->map[map_y][map_x] == 'D')
+                p_map->door.is_dor_v = 1;
             p_map->y_inter = y_inter;
             return sqrt(pow(x_inter - player_x, 2) + pow(y_inter - player_y, 2));
         }
@@ -122,6 +126,7 @@ double get_vertical(t_map *p_map, double ray_angle)
 
     return -1;
 }
+
 
 void raycasting(t_map *p_map)
 {
@@ -135,7 +140,10 @@ void raycasting(t_map *p_map)
     ray_angle = p_map->player.rot_angle - (FOV * (M_PI / 180) / 2);
     mlx_texture_t *texture;
 
-    while (i < WIDTH) {
+    while (i < WIDTH)
+    {
+        p_map->door.is_dor_h = 0;
+        p_map->door.is_dor_v = 0;
         ray_angle = fmod(ray_angle, 2 * M_PI);
         if (ray_angle < 0)
             ray_angle += 2 * M_PI;
@@ -147,12 +155,18 @@ void raycasting(t_map *p_map)
             p_map->y_inter = -1;
             distance = distance_h;
             side = 1;
-            texture = ft_whiche_texture( p_map->textures, ray_angle, side);
-        } else {
+            p_map->door.is_dor_v = 0;
+        }
+        else
+        {
             p_map->x_inter = -1;
             distance = distance_v;
-            texture = ft_whiche_texture( p_map->textures, ray_angle, side);
+            p_map->door.is_dor_h = 0;
         }
+        texture = ft_whiche_texture( p_map->textures, ray_angle, side);
+        if (p_map->door.is_dor_v || p_map->door.is_dor_h)
+                texture = p_map->textures[4];   
+
 
         distance *= cos(ray_angle - p_map->player.rot_angle);
         wall_height = (TILE_SIZE * DIST_PROJ_PLANE) / distance;
@@ -161,7 +175,6 @@ void raycasting(t_map *p_map)
 
         if (wall_top < 0)
             wall_top = 0;
-
         y = 0;
         while (y < HEIGHT)
         {

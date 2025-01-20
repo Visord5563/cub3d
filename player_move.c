@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:55:56 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/18 09:29:03 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/20 03:11:10 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,18 @@ int	check_key(mlx_key_data_t keydata, t_map *p_map)
 {
 	if (keydata.action != MLX_REPEAT && keydata.action != MLX_PRESS)
 		return (0);
-	if (keydata.key == MLX_KEY_W)
+	if (keydata.key == MLX_KEY_F)
+	{
+		if (p_map->map[(int)(p_map->player.y_double / TILE_SIZE)][(int)(p_map->player.x_double / TILE_SIZE)] == 'O')
+			return (0);
+		if (p_map->door.is_open)
+			p_map->door.is_open = 0;
+		else
+			p_map->door.is_open = 1;
+		p_map->player.walk_dir = 1;
+		return (2);
+	}
+	else if (keydata.key == MLX_KEY_W)
 		p_map->player.walk_dir = 1;
 	else if (keydata.key == MLX_KEY_S)
 		p_map->player.walk_dir = -1;
@@ -69,16 +80,18 @@ void	keyfunc(mlx_key_data_t keydata, void *param)
 	t_map	*p_map;
 	double	x_player;
 	double	y_player;
+	int		key_use;
 
 	p_map = (t_map *)param;
 	x_player = p_map->player.x_double;
 	y_player = p_map->player.y_double;
-	if (!check_key(keydata, p_map))
+	key_use = check_key(keydata, p_map);
+	if (!key_use)
 		return ;
 	p_map->player.rot_angle += p_map->player.turn_dir
 		* p_map->player.turn_speed;
 	update_player_position(p_map, &x_player, &y_player);
-	if (!hit_wall(p_map, x_player, y_player))
+	if (!hit_wall(p_map, x_player, y_player, key_use))
 	{
 		p_map->player.y_double = y_player;
 		p_map->player.x_double = x_player;
