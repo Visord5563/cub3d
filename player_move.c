@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:55:56 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/20 03:11:10 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/28 14:16:34 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,26 @@ void	update_player_position(t_map *p_map, double *x_player, double *y_player)
 	}
 }
 
+void	animation(t_map *map)
+{
+	int	current_frame;
+	int	previous_frame;
+
+	current_frame = map->i % 30;
+	previous_frame = (current_frame - 1 + 30) % 30;
+	map->player_img[current_frame]->enabled = true;
+	map->player_img[previous_frame]->enabled = false;
+	map->i = (map->i + 1) % 30;
+}
+
+void exec (void *param)
+{
+	t_map	*p_map;
+
+	p_map = (t_map *)param;
+	animation(p_map);
+}
+
 void	keyfunc(mlx_key_data_t keydata, void *param)
 {
 	t_map	*p_map;
@@ -100,8 +120,36 @@ void	keyfunc(mlx_key_data_t keydata, void *param)
 	key_release(p_map);
 }
 
+void cursorfunc(double xpos, double ypos, void* param)
+{
+	t_map			*p_map;
+	double			delta_x;
+	double			rotation_scale;
+	static double	prev_xpos;
+	static double	avg_delta_x;
+
+	rotation_scale = 0.003;
+	p_map = (t_map *)param;
+	if (xpos < 0 || ypos < 0)
+		xpos = 0;
+	if (xpos > WIDTH || ypos > HEIGHT)
+		xpos = WIDTH;
+	delta_x = xpos - prev_xpos;
+	prev_xpos = xpos;
+	avg_delta_x = 0.9 * avg_delta_x + 0.2 * delta_x;
+	p_map->player.rot_angle += avg_delta_x * rotation_scale;
+	if (p_map->player.rot_angle >= 2 * M_PI)
+		p_map->player.rot_angle -= 2 * M_PI;
+	if (p_map->player.rot_angle < 0)
+		p_map->player.rot_angle += 2 * M_PI;
+	if (fabs(delta_x) > 1)
+		raycasting(p_map);
+}
+
 void	move_player(t_map *p_map)
 {
+	mlx_cursor_hook(p_map->mlx, cursorfunc, p_map);
 	mlx_key_hook(p_map->mlx, keyfunc, p_map);
 	mlx_close_hook(p_map->mlx, close_win, p_map);
+	mlx_loop_hook(p_map->mlx, exec, p_map);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 12:24:37 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/20 01:35:57 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:21:08 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	init_map(t_map **p_map)
 	map->player.img = NULL;
 	map->mlx = NULL;
 	map->fd = -1;
+	map->i = 0;
 	init_textures(map);
 	*p_map = map;
 }

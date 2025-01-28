@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/20 01:35:13 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:03:51 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,16 @@
 #include <math.h>
 #include <string.h>
 #include <limits.h>
-
 #include "libft/libft.h"
 #include "./MLX42/include/MLX42/MLX42.h"
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 145
-#endif
+#define BUFFER_SIZE 145
 
 #define WIDTH 1200
 #define HEIGHT 1000
 #define M_WIDTH (WIDTH / 4)
 #define M_HEIGHT (HEIGHT / 4)
 #define MOVE_MAP 10
-
 #define FOV 60
 #define TILE_SIZE 30
 #define DIST_PROJ_PLANE (WIDTH / (2 * tan((FOV * M_PI / 180) / 2)))
@@ -80,10 +76,10 @@ typedef struct s_dir
 
 typedef struct s_door
 {
-	int is_open;
-	int inside_door;
-	int is_dor_v;
-	int is_dor_h;
+	int	is_open;
+	int	inside_door;
+	int	is_dor_v;
+	int	is_dor_h;
 }	t_door;
 
 typedef struct s_minimap_vars
@@ -121,13 +117,15 @@ typedef struct s_map
 	t_color			f;
 	t_color			c;
 	t_player		player;
+	t_door			door;
 	t_minimap		minimap;
 	mlx_t			*mlx;
 	mlx_image_t		*map_img;
 	mlx_texture_t	*textures[5];
 	int				map_width;
 	int				map_height;
-	t_door			door;
+	mlx_image_t		**player_img;
+	int 			i;
 }	t_map;
 
 char			*get_next_line(int fd);
@@ -169,3 +167,4 @@ int				hit_wall(t_map *p_map, double x, double y, int key_use);
 void			draw_ray_with_angle(float x0, float y0, t_map *p_map);
 void			free_map_textures(t_map *map);
 int				is_texture_valid(t_map *map);
+mlx_image_t		**generating_frames(t_map *map, char *path, int frames);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 15:20:12 by saharchi          #+#    #+#             */
-/*   Updated: 2024/12/09 02:44:14 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:40:17 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*nstr;
-	size_t i;
-	size_t j;
-	
+	size_t	i;
+	size_t	j;
+
 	i = 0;
 	j = 0;
 	if (!s1)
 		return (ft_strdup(s2));
 	nstr = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if(!nstr)
-		return(NULL);
+	if (!nstr)
+		return (NULL);
 	while (s1[j])
 		nstr[i++] = s1[j++];
 	j = 0;
 	while (s2[j])
 		nstr[i++] = s2[j++];
 	nstr[i] = '\0';
-	free((void*)s1);
+	free((void *)s1);
 	return (nstr);
 }
 
@@ -65,38 +65,16 @@ char	*ft_strdup(const char *s1)
 	return (s);
 }
 
-int  ft_strchr2( char *s)
+int	ft_strchr2( char *s)
 {
-    int i;
+	int	i;
 
-    i = 0;
+	i = 0;
 	while (s[i])
-    {
-        if(s[i] == '\n')
-            return (i + 1);
-        i++;
+	{
+		if (s[i] == '\n')
+			return (i + 1);
+		i++;
 	}
 	return (-1);
 }
-
-// char	*ft_substr(char *s, unsigned int start, size_t len)
-// {
-// 	char			*s1;
-// 	size_t			i;
-// 	size_t	j;
-
-// 	i = ft_strlen(s) - start;
-// 	if (len < i)
-// 		i = len;
-// 	s1 = malloc(sizeof(char) * (i + 1));
-// 	if (!s1)
-// 		return (NULL);
-// 	j = 0;
-// 	while (j < i)
-// 	{
-// 		s1[j] = s[j + start];
-// 		j++;
-// 	}
-// 	s1[j] = '\0';
-// 	return (s1);
-// }

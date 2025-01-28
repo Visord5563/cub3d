@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:10:37 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/18 11:57:41 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/28 14:17:36 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	map_render(t_map *p_map)
 	get_width_height(p_map);
 	ft_realloc(p_map);
 	ft_minimap(p_map);
+	p_map->player_img = generating_frames(p_map, "texture/res/", 30);
 	raycasting(p_map);
 	move_player(p_map);
 	mlx_loop(p_map->mlx);
