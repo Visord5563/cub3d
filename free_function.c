@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 12:22:09 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/29 22:10:52 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 23:10:05 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	free_map(t_map *map)
 		mlx_delete_image(map->mlx, map->minimap.img);
 	if (map->player.img)
 		mlx_delete_image(map->mlx, map->player.img);
+	delete_textures(map);
 	if (map->mlx)
 		mlx_terminate(map->mlx);
-	delete_textures(map);
 	free(map);
 }
