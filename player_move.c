@@ -6,31 +6,32 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:55:56 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/29 20:50:15 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 21:51:03 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	handle_key_f(t_map *p_map)
+{
+	if (check_player_f(p_map))
+		return (0);
+	p_map->door.tmp_is_open = p_map->door.is_open;
+	if (p_map->map[(int)(p_map->player.y_double / TILE_SIZE)]
+		[(int)(p_map->player.x_double / TILE_SIZE)] == 'O')
+		return (0);
+	p_map->door.is_open = !p_map->door.is_open;
+	p_map->player.walk_dir = 1;
+	return (2);
+}
 
 int	check_key(mlx_key_data_t keydata, t_map *p_map)
 {
 	if (keydata.action != MLX_REPEAT && keydata.action != MLX_PRESS)
 		return (0);
 	if (keydata.key == MLX_KEY_F)
-	{
-		if (check_player_f(p_map))
-			return (0);
-		p_map->door.tmp_is_open = p_map->door.is_open;
-		if (p_map->map[(int)(p_map->player.y_double / TILE_SIZE)][(int)(p_map->player.x_double / TILE_SIZE)] == 'O')
-			return (0);
-		if (p_map->door.is_open)
-			p_map->door.is_open = 0;
-		else
-			p_map->door.is_open = 1;
-		p_map->player.walk_dir = 1;
-		return (2);
-	}
-	else if (keydata.key == MLX_KEY_W)
+		return (handle_key_f(p_map));
+	if (keydata.key == MLX_KEY_W)
 		p_map->player.walk_dir = 1;
 	else if (keydata.key == MLX_KEY_S)
 		p_map->player.walk_dir = -1;
@@ -78,26 +79,6 @@ void	update_player_position(t_map *p_map, double *x_player, double *y_player)
 	}
 }
 
-void	animation(t_map *map)
-{
-	int	current_frame;
-	int	previous_frame;
-
-	current_frame = map->i % 30;
-	previous_frame = (current_frame - 1 + 30) % 30;
-	map->player_img[current_frame]->enabled = true;
-	map->player_img[previous_frame]->enabled = false;
-	map->i = (map->i + 1) % 30;
-}
-
-void exec (void *param)
-{
-	t_map	*p_map;
-
-	p_map = (t_map *)param;
-	animation(p_map);
-}
-
 void	keyfunc(mlx_key_data_t keydata, void *param)
 {
 	t_map	*p_map;
@@ -121,32 +102,6 @@ void	keyfunc(mlx_key_data_t keydata, void *param)
 	}
 	raycasting(p_map);
 	key_release(p_map);
-}
-
-void cursorfunc(double xpos, double ypos, void* param)
-{
-	t_map			*p_map;
-	double			delta_x;
-	double			rotation_scale;
-	static double	prev_xpos;
-	static double	avg_delta_x;
-
-	rotation_scale = 0.003;
-	p_map = (t_map *)param;
-	if (xpos < 0 || ypos < 0)
-		xpos = 0;
-	if (xpos > WIDTH || ypos > HEIGHT)
-		xpos = WIDTH;
-	delta_x = xpos - prev_xpos;
-	prev_xpos = xpos;
-	avg_delta_x = 0.9 * avg_delta_x + 0.2 * delta_x;
-	p_map->player.rot_angle += avg_delta_x * rotation_scale;
-	if (p_map->player.rot_angle >= 2 * M_PI)
-		p_map->player.rot_angle -= 2 * M_PI;
-	if (p_map->player.rot_angle < 0)
-		p_map->player.rot_angle += 2 * M_PI;
-	if (fabs(delta_x) > 1)
-		raycasting(p_map);
 }
 
 void	move_player(t_map *p_map)

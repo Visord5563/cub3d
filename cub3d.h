@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/29 20:51:23 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:32:12 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,10 @@
 
 #define WIDTH 1200
 #define HEIGHT 1000
-#define M_WIDTH (WIDTH / 4)
-#define M_HEIGHT (HEIGHT / 4)
 #define MOVE_MAP 10
 #define FOV 60
 #define TILE_SIZE 30
 #define DIST_PROJ_PLANE (WIDTH / (2 * tan((FOV * M_PI / 180) / 2)))
-#define PLAYER_SIZE (TILE_SIZE / 3)
 
 typedef struct s_color
 {
@@ -59,8 +56,16 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	float	angle;
-	float	dist;
+	double	player_x;
+	double	player_y;
+	double	x_inter;
+	double	y_inter;
+	double	x_step;
+	double	y_step;
+	int		facing_down;
+	int		facing_up;
+	int		facing_right;
+	int		facing_left;
 }	t_ray;
 
 typedef struct s_dir
@@ -115,10 +120,12 @@ typedef struct s_map
 	char			*we;
 	char			*ea;
 	char			*d;
+	double			ray_angle;
 	t_color			f;
 	t_color			c;
 	t_player		player;
 	t_door			door;
+	t_ray			ray;
 	t_minimap		minimap;
 	mlx_t			*mlx;
 	mlx_image_t		*map_img;
@@ -126,6 +133,7 @@ typedef struct s_map
 	int				map_width;
 	int				map_height;
 	mlx_image_t		**player_img;
+	double			p_sz;
 	int				i;
 }	t_map;
 
@@ -170,3 +178,5 @@ void			free_map_textures(t_map *map);
 int				is_texture_valid(t_map *map);
 mlx_image_t		**generating_frames(t_map *map, char *path, int frames);
 int				check_player_f(t_map *p_map);
+void			cursorfunc(double xpos, double ypos, void *param);
+void			exec(void *param);

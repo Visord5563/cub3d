@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:54:27 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/20 00:23:29 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:17:42 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	create_player(t_map *p_map)
 
 void	ft_minimap(t_map *p_map)
 {
-	p_map->minimap.img = mlx_new_image(p_map->mlx, M_WIDTH, M_HEIGHT);
+	p_map->minimap.img = mlx_new_image(p_map->mlx, (WIDTH / 4), (HEIGHT / 4));
 	if (!p_map->minimap.img || (mlx_image_to_window(p_map->mlx,
 				p_map->minimap.img, MOVE_MAP, MOVE_MAP) < 0))
 	{
@@ -76,7 +76,7 @@ void	ft_minimap(t_map *p_map)
 	}
 	p_map->minimap.base_height = (p_map->map_height) / 2;
 	p_map->minimap.base_width = (p_map->map_width) / 2;
-	p_map->minimap.cell_h = M_HEIGHT / p_map->minimap.base_height;
-	p_map->minimap.cell_w = M_WIDTH / p_map->minimap.base_width;
+	p_map->minimap.cell_h = (HEIGHT / 4) / p_map->minimap.base_height;
+	p_map->minimap.cell_w = (WIDTH / 4) / p_map->minimap.base_width;
 	create_player(p_map);
 }

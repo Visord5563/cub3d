@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 01:51:36 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/29 21:38:56 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:30:40 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	check_player_f(t_map *p_map)
 	int	map_y_end;
 	int	j;
 
-	map_x_start = floor((p_map->player.x_double - PLAYER_SIZE / 2) / TILE_SIZE);
-	map_y_start = floor((p_map->player.y_double - PLAYER_SIZE / 2) / TILE_SIZE);
-	map_x_end = floor((p_map->player.x_double + PLAYER_SIZE / 2) / TILE_SIZE);
-	map_y_end = floor((p_map->player.y_double + PLAYER_SIZE / 2) / TILE_SIZE);
+	map_x_start = floor((p_map->player.x_double - p_map->p_sz / 2) / TILE_SIZE);
+	map_y_start = floor((p_map->player.y_double - p_map->p_sz / 2) / TILE_SIZE);
+	map_x_end = floor((p_map->player.x_double + p_map->p_sz / 2) / TILE_SIZE);
+	map_y_end = floor((p_map->player.y_double + p_map->p_sz / 2) / TILE_SIZE);
 	while (map_x_start <= map_x_end)
 	{
 		j = map_y_start;
@@ -70,10 +70,10 @@ int	hit_wall(t_map *p_map, double x, double y, int key_use)
 	int	map_y_end;
 	int	j;
 
-	map_x_start = floor((x - PLAYER_SIZE / 2) / TILE_SIZE);
-	map_y_start = floor((y - PLAYER_SIZE / 2) / TILE_SIZE);
-	map_x_end = floor((x + PLAYER_SIZE / 2) / TILE_SIZE);
-	map_y_end = floor((y + PLAYER_SIZE / 2) / TILE_SIZE);
+	map_x_start = floor((x - p_map->p_sz / 2) / TILE_SIZE);
+	map_y_start = floor((y - p_map->p_sz / 2) / TILE_SIZE);
+	map_x_end = floor((x + p_map->p_sz / 2) / TILE_SIZE);
+	map_y_end = floor((y + p_map->p_sz / 2) / TILE_SIZE);
 	while (map_x_start <= map_x_end)
 	{
 		j = map_y_start;
