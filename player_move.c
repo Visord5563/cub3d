@@ -6,11 +6,41 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:55:56 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/28 18:58:34 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/29 21:36:23 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int check_player_f(t_map *p_map)
+{
+	int	map_x_start;
+	int	map_y_start;
+	int	map_x_end;
+	int	map_y_end;
+	int	j;
+	
+	map_x_start = floor((p_map->player.x_double - floor(PLAYER_SIZE / 2)) / TILE_SIZE);
+	map_y_start = floor((p_map->player.y_double - floor(PLAYER_SIZE / 2)) / TILE_SIZE);
+	map_x_end = floor((p_map->player.x_double + floor(PLAYER_SIZE / 2)) / TILE_SIZE);
+	map_y_end = floor((p_map->player.y_double + floor(PLAYER_SIZE / 2)) / TILE_SIZE);
+
+	while (map_x_start <= map_x_end)
+	{
+		j = map_y_start;
+		while (j <= map_y_end)
+		{
+			if (j < 0 || map_x_start < 0
+				|| j >= p_map->map_height || map_x_start >= p_map->map_width)
+				return (1);
+			if (p_map->map[j][map_x_start] == 'O')
+				return (1);
+			j++;
+		}
+		map_x_start++;
+	}
+	return (0);
+}
 
 int	check_key(mlx_key_data_t keydata, t_map *p_map)
 {
@@ -18,6 +48,9 @@ int	check_key(mlx_key_data_t keydata, t_map *p_map)
 		return (0);
 	if (keydata.key == MLX_KEY_F)
 	{
+		if (check_player_f(p_map))
+			return (0);
+		p_map->door.tmp_is_open = p_map->door.is_open;
 		if (p_map->map[(int)(p_map->player.y_double / TILE_SIZE)][(int)(p_map->player.x_double / TILE_SIZE)] == 'O')
 			return (0);
 		if (p_map->door.is_open)

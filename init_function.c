@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 12:24:37 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/27 13:21:08 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/29 19:49:00 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ void	get_posplayer(t_map *p_map, int y, int x)
 	p_map->x_inter = -1;
 	p_map->y_inter = -1;
 	p_map->door.is_open = 0;
+	p_map->door.tmp_is_open = 0;
 	p_map->door.inside_door = 0;
 }

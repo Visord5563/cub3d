@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/29 19:20:45 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/29 21:36:54 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_door
 	int	inside_door;
 	int	is_dor_v;
 	int	is_dor_h;
+	int tmp_is_open;
 }	t_door;
 
 typedef struct s_minimap_vars

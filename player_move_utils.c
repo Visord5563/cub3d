@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 01:51:36 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/28 18:59:30 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/29 21:36:42 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	hit_wall(t_map *p_map, double x, double y, int key_use)
 	}
 	if (key_use == 2)
 	{
-		p_map->door.is_open = 0;
+		p_map->door.is_open = p_map->door.tmp_is_open;
 		return (1);
 	}
 	return (0);
