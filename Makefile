@@ -6,7 +6,7 @@
 #    By: relamine <relamine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/03 17:08:07 by saharchi          #+#    #+#              #
-#    Updated: 2025/01/29 23:05:08 by relamine         ###   ########.fr        #
+#    Updated: 2025/01/29 23:13:42 by relamine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = cub3D
 
 LIBFT = ./libft/libft.a
 
-CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast -g -fsanitize=address
 RM = rm -f
 
 SRC = main.c get_next_line.c get_next_line_utils.c my_split.c parsing_color.c parsing_map.c  parsing_texture.c parsing_utils.c init_function.c \

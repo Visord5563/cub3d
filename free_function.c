@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 12:22:09 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/29 23:10:05 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 23:20:37 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	delete_textures(t_map *map)
 			mlx_delete_texture(map->textures[i]);
 		i++;
 	}
+	if (!map->player_img)
+		return ;
 	i = 0;
 	while (i < 30)
 	{

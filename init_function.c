@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 12:24:37 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/29 22:30:53 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 23:19:14 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	init_textures(t_map *map)
 	i = 0;
 	while (i < 4)
 	{
-		if (map->textures[i])
-			map->textures[i] = NULL;
+		map->textures[i] = NULL;
 		i++;
 	}
+	map->player_img = NULL;
 }
 
 void	init_map(t_map **p_map)

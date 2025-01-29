@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/29 22:45:06 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 23:24:58 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 #define BUFFER_SIZE 145
 
-#define WIDTH 1200
-#define HEIGHT 1000
+#define WIDTH 800
+#define HEIGHT 800
 #define FOV 60
 #define TILE_SIZE 30
 

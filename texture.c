@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:32:06 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/29 22:02:14 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 23:24:39 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ void	load_tex(t_map *map, mlx_image_t **new, char *tx_path, int i)
 	mlx_texture_t	*tx;
 
 	tx = mlx_load_png(tx_path);
+	if (!tx)
+	{
+		printf("Error\n");
+		free_map(map);
+		exit(1);
+	}
 	new[i] = mlx_texture_to_image(map->mlx, tx);
 	new[i]->enabled = (i == 0);
 	mlx_resize_image(new[i], WIDTH, HEIGHT);
