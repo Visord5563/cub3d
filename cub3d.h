@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/27 18:03:51 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/29 19:47:56 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_door
 	int	inside_door;
 	int	is_dor_v;
 	int	is_dor_h;
+	int tmp_is_open;
 }	t_door;
 
 typedef struct s_minimap_vars

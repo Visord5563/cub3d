@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 01:51:36 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/20 03:11:02 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 19:47:29 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	hit_wall(t_map *p_map, double x, double y, int key_use)
 	}
 	if (key_use == 2)
 	{
-		p_map->door.is_open = 0;
+		p_map->door.is_open = p_map->door.tmp_is_open;
 		return (1);
 	}
 	return (0);
