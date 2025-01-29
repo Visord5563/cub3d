@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 07:05:59 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/29 21:08:14 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:44:45 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	render_player(t_map *p_map, int x1, int y1)
 				TILE_SIZE) / TILE_SIZE * p_map->minimap.cell_h);
 	x_start = player_x - (p_map->player.width / 2);
 	y_start = player_y - (p_map->player.height / 2);
-	p_map->player.img->instances[0].x = x_start + MOVE_MAP;
-	p_map->player.img->instances[0].y = y_start + MOVE_MAP;
-	draw_ray_with_angle(player_x + MOVE_MAP, player_y + MOVE_MAP, p_map);
+	p_map->player.img->instances[0].x = x_start + 10;
+	p_map->player.img->instances[0].y = y_start + 10;
+	draw_ray_with_angle(player_x + 10, player_y + 10, p_map);
 }
 
 void	draw_minimap_cell_pixels(t_map *p_map,

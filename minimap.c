@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:54:27 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/29 22:17:42 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:45:02 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	create_player(t_map *p_map)
 	p_map->player.img = mlx_new_image(p_map->mlx,
 			p_map->player.width, p_map->player.height);
 	if (!p_map->player.img || mlx_image_to_window(p_map->mlx,
-			p_map->player.img, MOVE_MAP, MOVE_MAP) < 0)
+			p_map->player.img, 10, 10) < 0)
 	{
 		printf("Error\n");
 		return (free_map(p_map), exit(1));
@@ -68,7 +68,7 @@ void	ft_minimap(t_map *p_map)
 {
 	p_map->minimap.img = mlx_new_image(p_map->mlx, (WIDTH / 4), (HEIGHT / 4));
 	if (!p_map->minimap.img || (mlx_image_to_window(p_map->mlx,
-				p_map->minimap.img, MOVE_MAP, MOVE_MAP) < 0))
+				p_map->minimap.img, 10, 10) < 0))
 	{
 		printf("Error\n");
 		free_map(p_map);

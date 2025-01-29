@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 17:35:21 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/29 22:36:23 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 22:43:35 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,10 @@ double	get_vertical(t_map *p_map, double ray_angle)
 
 void	get_wall(double distance, double *wall_height, double *wall_top, double *wall_bottom)
 {
-	*wall_height = (TILE_SIZE * DIST_PROJ_PLANE) / distance;
+	int	dist_proj_plane;
+
+	dist_proj_plane = (WIDTH / (2 * tan((FOV * M_PI / 180) / 2)));
+	*wall_height = (TILE_SIZE * dist_proj_plane) / distance;
 	*wall_top = (HEIGHT / 2) - (*wall_height / 2);
 	*wall_bottom = *wall_top + *wall_height;
 	if (*wall_top < 0)
@@ -235,7 +238,6 @@ void	rander_texter(t_map *p_map, double distance, int i, int side)
 	texture = choose_texture(p_map, side, &distance);
 	render_wall_texture(p_map, distance, i, texture);
 }
-
 
 void	check_ray(t_map *p_map, double *distance, int *side)
 {
