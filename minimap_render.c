@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 07:05:59 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/20 03:15:51 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/29 21:08:14 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,7 @@ void	draw_minimap_cell_pixels(t_map *p_map,
 	{
 		x_pixel = vars.x_scale * p_map->minimap.cell_w + x_map;
 		y_pixel = vars.y_scale * p_map->minimap.cell_h + y_map;
-		if ((x_map == 0 || y_map == 0)
-			&& p_map->map[vars.y_top][vars.x_left] != ' ')
-			mlx_put_pixel(p_map->minimap.img, x_pixel,
-				y_pixel, get_rgba(0, 0, 0, 100));
-		else if (p_map->map[vars.y_top][vars.x_left] == 'D')
+		if (p_map->map[vars.y_top][vars.x_left] == 'D')
 			mlx_put_pixel(p_map->minimap.img, x_pixel,
 				y_pixel, get_rgba(97, 55, 49, 255));
 		else if (p_map->map[vars.y_top][vars.x_left] == 'O')
