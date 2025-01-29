@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 12:22:09 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/28 14:38:08 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/29 21:31:03 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	free_map_textures(t_map *map)
 		map->d = NULL;
 	}
 	int i = 0;
-	while (map->player_img[i])
+	while (i < 30)
 	{
 		mlx_delete_image(map->mlx, map->player_img[i]);
 		i++;

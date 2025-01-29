@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/27 18:03:51 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/29 19:20:45 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,16 @@ typedef struct s_ray
 {
 	float	angle;
 	float	dist;
+	double player_x;
+    double player_y;
+	double x_inter;
+	double y_inter;
+	double x_step;
+	double y_step;
+	int facing_down;
+	int facing_up;
+	int facing_right;
+	int facing_left;
 }	t_ray;
 
 typedef struct s_dir
@@ -103,6 +113,8 @@ typedef struct s_minimap
 	int			base_width;
 }	t_minimap;
 
+
+
 typedef struct s_map
 {
 	char			**map;
@@ -114,10 +126,12 @@ typedef struct s_map
 	char			*we;
 	char			*ea;
 	char			*d;
+	double			ray_angle;
 	t_color			f;
 	t_color			c;
 	t_player		player;
 	t_door			door;
+	t_ray			ray;
 	t_minimap		minimap;
 	mlx_t			*mlx;
 	mlx_image_t		*map_img;

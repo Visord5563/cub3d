@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:47:41 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/27 18:02:56 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:41:51 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,14 @@ int	check_player(char map)
 	return (0);
 }
 
-int	valid_element(char map)
+int	valid_element(char map , t_map *p_map)
 {
 	if (map != '1' && map != '0' && !is_space(map)
 		&& !check_player(map) && map != 'D')
 	{
 		printf("Error\n");
-		exit(1);
+		free_map(p_map);
+		return (0);
 	}
 	return (1);
 }
@@ -138,7 +139,7 @@ void	valid_line(char **line, int i, t_map *p_map, int *cou)
 	j = 0;
 	while (is_space(line[i][j]))
 		j++;
-	while (line[i][j] && valid_element(line[i][j]))
+	while (line[i][j] && valid_element(line[i][j] , p_map))
 	{
 		if (check_player(line[i][j]))
 			check_player_position(line, i, j, p_map, cou);
