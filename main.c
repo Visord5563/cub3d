@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:37 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/31 21:25:25 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/31 23:15:59 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	valid_element(char map , t_map *p_map)
+int	valid_element(char map, t_map *p_map)
 {
 	if (map != '1' && map != '0' && !is_space(map)
 		&& !check_player(map) && map != 'D')
@@ -44,6 +44,7 @@ void	leaks(void)
 {
 	system("leaks cub3D");
 }
+
 char	**resize_map(t_map *p_map)
 {
 	int		i;
@@ -78,7 +79,6 @@ int	main(int argc, char **argv)
 	t_map	*p_map;
 	int		status;
 
-	// atexit(leaks);
 	status = 0;
 	init_map(&p_map);
 	if (argc != 2 || !ft_strchr(argv[1], '.')

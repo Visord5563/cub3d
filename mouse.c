@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 21:50:28 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/31 18:37:07 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/31 22:48:59 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,30 @@ void	exec(void *param)
 	t_map	*p_map;
 
 	p_map = (t_map *)param;
+	raycasting(p_map);
 	animation(p_map);
 }
 
 void	cursorfunc(double xpos, double ypos, void *param)
 {
 	t_map			*p_map;
-	double			delta_x;
-	double			rotation_scale;
 	static double	prev_xpos;
-	static double	avg_delta_x;
 
-	rotation_scale = 0.003;
 	p_map = (t_map *)param;
-	if (xpos < 0 || ypos < 0)
-		xpos = 0;
-	if (xpos > WIDTH || ypos > HEIGHT)
-		xpos = WIDTH;
-	delta_x = xpos - prev_xpos;
-	prev_xpos = xpos;
-	avg_delta_x = 0.9 * avg_delta_x + 0.2 * delta_x;
-	p_map->player.rot_angle += avg_delta_x * rotation_scale;
+	mlx_set_cursor_mode(p_map->mlx, MLX_MOUSE_DISABLED);
+	if (xpos < 0 || ypos < 0 || xpos > WIDTH || ypos > HEIGHT)
+	{
+		prev_xpos = WIDTH / 2;
+		mlx_set_mouse_pos(p_map->mlx, WIDTH / 2, HEIGHT / 2);
+		return ;
+	}
+	p_map->player.rot_angle += (xpos - prev_xpos) * 0.003;
 	if (p_map->player.rot_angle >= 2 * M_PI)
 		p_map->player.rot_angle -= 2 * M_PI;
 	if (p_map->player.rot_angle < 0)
 		p_map->player.rot_angle += 2 * M_PI;
-	if (fabs(delta_x) > 1)
-		raycasting(p_map);
+	prev_xpos = WIDTH / 2;
+	mlx_set_mouse_pos(p_map->mlx, WIDTH / 2, HEIGHT / 2);
 }
 
 void	draw_wall_section(t_map *p_map, int i, int y, int color[4])
@@ -66,10 +63,16 @@ void	draw_wall_section(t_map *p_map, int i, int y, int color[4])
 
 void	draw_floor_ceiling(t_map *p_map, int i, int y)
 {
+	int	alpha;
+
+	alpha = 255;
 	if (y > (HEIGHT / 2))
+	{
+		alpha *= fmod(y, (HEIGHT / 2)) / (HEIGHT / 2);
 		mlx_put_pixel(p_map->map_img, i, y,
-			get_rgba(p_map->c.r, p_map->c.g, p_map->c.b, 255));
+			get_rgba(p_map->f.r, p_map->f.g, p_map->f.b, alpha));
+	}
 	else
 		mlx_put_pixel(p_map->map_img, i, y,
-			get_rgba(p_map->f.r, p_map->f.g, p_map->f.b, 255));
+			get_rgba(p_map->c.r, p_map->c.g, p_map->c.b, 80));
 }

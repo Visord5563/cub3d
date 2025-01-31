@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 13:10:37 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/31 21:26:14 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/31 22:59:14 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	get_width_height(t_map *p_map)
 	p_map->map_height = i;
 }
 
-
-
 void	map_render(t_map *p_map)
 {
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
@@ -49,7 +47,6 @@ void	map_render(t_map *p_map)
 		error(p_map);
 	ft_minimap(p_map);
 	p_map->player_img = generating_frames(p_map, "texture/res/", 30);
-	raycasting(p_map);
 	move_player(p_map);
 	mlx_loop(p_map->mlx);
 }

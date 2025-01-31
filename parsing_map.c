@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:47:41 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/31 21:21:54 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/31 23:16:20 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ void	check_and_exit(char **line, int i, int j, t_map *p_map)
 		error(p_map);
 }
 
-void	check_player_position(char **line, int i, int j, t_map *p_map, int *cou)
+void	check_player_position(char **line, int i, int j, t_map *p_map)
 {
-	(*cou)++;
 	check_and_exit(line, i, j, p_map);
 	get_posplayer(p_map, i, j);
 }
@@ -54,7 +53,10 @@ void	valid_line(char **line, int i, t_map *p_map, int *cou)
 	while (line[i][j] && valid_element(line[i][j], p_map))
 	{
 		if (check_player(line[i][j]))
-			check_player_position(line, i, j, p_map, cou);
+		{
+			(*cou)++;
+			check_player_position(line, i, j, p_map);
+		}
 		else if (line[i][j] == '0')
 			check_and_exit(line, i, j, p_map);
 		else if (line[i][j] == 'D')

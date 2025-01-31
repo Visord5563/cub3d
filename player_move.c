@@ -6,7 +6,7 @@
 /*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:55:56 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/29 21:51:03 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/31 22:48:11 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ void	keyfunc(mlx_key_data_t keydata, void *param)
 		p_map->player.y_double = y_player;
 		p_map->player.x_double = x_player;
 	}
-	raycasting(p_map);
 	key_release(p_map);
 }
 

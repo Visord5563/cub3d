@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/31 21:14:52 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/31 23:23:58 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 #include <string.h>
 #include <limits.h>
 #include "libft/libft.h"
-#include "./MLX42/include/MLX42/MLX42.h"
+#include "../MLX42/include/MLX42/MLX42.h"
 
 #define BUFFER_SIZE 145
 
-#define WIDTH 1200
-#define HEIGHT 1000
+#define WIDTH 800
+#define HEIGHT 800
 #define FOV 60
 #define TILE_SIZE 30
 
@@ -166,7 +166,7 @@ void			raycasting(t_map *p_map);
 void			draw_minimap(t_map *p_map);
 void			_texters(double yp, int *colors,
 					mlx_texture_t *texture, t_map *p_map);
-mlx_texture_t	*ft_whiche_texture( mlx_texture_t *texture[4],
+mlx_texture_t	*ft_whiche_texture( mlx_texture_t *texture[5],
 					double ray_angle, int side);
 void			key_release(t_map *p_map);
 void			close_win(void *param);
@@ -197,5 +197,4 @@ void			check_wall(t_map *p_map, char *map);
 int				check_space(char **map, int i, int j);
 int				check_player(char map);
 int				valid_element(char map, t_map *p_map);
-// void			ft_realloc(t_map *map);
 void			get_width_height(t_map *p_map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 17:35:21 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/31 18:37:46 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/01/31 23:29:18 by relamine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	render_wall_texture(t_map *p_map, double distance,
 		{
 			_texters(1.0 - (wall_bottom - y) / wall_height, color,
 				texture, p_map);
+			if (distance >= TILE_SIZE)
+				color[3] *= (TILE_SIZE / distance);
 			draw_wall_section(p_map, i, y, color);
 		}
 		else
