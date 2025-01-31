@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 21:50:28 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/29 21:51:54 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:37:07 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,20 @@ void	cursorfunc(double xpos, double ypos, void *param)
 		p_map->player.rot_angle += 2 * M_PI;
 	if (fabs(delta_x) > 1)
 		raycasting(p_map);
+}
+
+void	draw_wall_section(t_map *p_map, int i, int y, int color[4])
+{
+	mlx_put_pixel(p_map->map_img, i, y,
+		get_rgba(color[0], color[1], color[2], color[3]));
+}
+
+void	draw_floor_ceiling(t_map *p_map, int i, int y)
+{
+	if (y > (HEIGHT / 2))
+		mlx_put_pixel(p_map->map_img, i, y,
+			get_rgba(p_map->c.r, p_map->c.g, p_map->c.b, 255));
+	else
+		mlx_put_pixel(p_map->map_img, i, y,
+			get_rgba(p_map->f.r, p_map->f.g, p_map->f.b, 255));
 }

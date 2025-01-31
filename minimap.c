@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:54:27 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/29 22:45:02 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/31 21:26:37 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,7 @@ void	ft_minimap(t_map *p_map)
 	p_map->minimap.img = mlx_new_image(p_map->mlx, (WIDTH / 4), (HEIGHT / 4));
 	if (!p_map->minimap.img || (mlx_image_to_window(p_map->mlx,
 				p_map->minimap.img, 10, 10) < 0))
-	{
-		printf("Error\n");
-		free_map(p_map);
-		exit(1);
-	}
+			error(p_map);
 	p_map->minimap.base_height = (p_map->map_height) / 2;
 	p_map->minimap.base_width = (p_map->map_width) / 2;
 	p_map->minimap.cell_h = (HEIGHT / 4) / p_map->minimap.base_height;

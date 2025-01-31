@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:32:06 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/29 23:24:39 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/31 21:27:10 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,7 @@ void	load_tex(t_map *map, mlx_image_t **new, char *tx_path, int i)
 
 	tx = mlx_load_png(tx_path);
 	if (!tx)
-	{
-		printf("Error\n");
-		free_map(map);
-		exit(1);
-	}
+		error(map);
 	new[i] = mlx_texture_to_image(map->mlx, tx);
 	new[i]->enabled = (i == 0);
 	mlx_resize_image(new[i], WIDTH, HEIGHT);
@@ -88,4 +84,21 @@ mlx_image_t	**generating_frames(t_map *map, char *path, int frames)
 	}
 	new[0]->enabled = true;
 	return (new);
+}
+
+int	check_namnf(t_map *p_map, char *av)
+{
+	if (ft_strlen(ft_strchr(av, '.')) == 4
+		&& !ft_strcmp(ft_strchr(av, '.'), ".cub"))
+	{
+		p_map->fd = open(av, O_RDONLY);
+		if (p_map->fd == -1)
+		{
+			printf("Error Number % d\n", errno);
+			perror("Program");
+			return (0);
+		}
+		return (1);
+	}
+	return (0);
 }

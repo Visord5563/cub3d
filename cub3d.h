@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/29 23:24:58 by relamine         ###   ########.fr       */
+/*   Updated: 2025/01/31 21:14:52 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 #define BUFFER_SIZE 145
 
-#define WIDTH 800
-#define HEIGHT 800
+#define WIDTH 1200
+#define HEIGHT 1000
 #define FOV 60
 #define TILE_SIZE 30
 
@@ -178,3 +178,24 @@ mlx_image_t		**generating_frames(t_map *map, char *path, int frames);
 int				check_player_f(t_map *p_map);
 void			cursorfunc(double xpos, double ypos, void *param);
 void			exec(void *param);
+
+void			get_wall(double distance, double *wall_height,
+	double *wall_top, double *wall_bottom);
+int				hit_wall(t_map *p_map, double x, double y, int key_use);
+double			get_horizontal(t_map *p_map, double ray_angle);
+double			get_vertical(t_map *p_map, double ray_angle);
+void			get_x(t_map *p_map, double ray_angle);
+void			get_y(t_map *p_map, double ray_angle);
+void			init_ray(t_map *p_map, double ray_angle);
+double			calculate_distance(t_map *p_map);
+int				check_boundaries(t_map *p_map, int map_x, int map_y);
+void			draw_wall_section(t_map *p_map, int i, int y, int color[4]);
+void			draw_floor_ceiling(t_map *p_map, int i, int y);
+void			error(t_map *p_map);
+int				is_space(char c);
+void			check_wall(t_map *p_map, char *map);
+int				check_space(char **map, int i, int j);
+int				check_player(char map);
+int				valid_element(char map, t_map *p_map);
+// void			ft_realloc(t_map *map);
+void			get_width_height(t_map *p_map);
