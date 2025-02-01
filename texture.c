@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:32:06 by relamine          #+#    #+#             */
-/*   Updated: 2025/02/01 23:16:26 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:29:54 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ mlx_image_t	**generating_frames(t_map *map, char *path, int frames)
 	i = 0;
 	new = malloc(frames * sizeof(mlx_image_t *));
 	if (!new)
-		return (NULL);
+		error(map);
 	while (i < frames)
 	{
 		tx_path = get_path(path, i);
