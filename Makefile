@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: relamine <relamine@student.42.fr>          +#+  +:+       +#+         #
+#    By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/03 17:08:07 by saharchi          #+#    #+#              #
-#    Updated: 2025/01/31 23:24:15 by relamine         ###   ########.fr        #
+#    Updated: 2025/02/01 22:38:25 by saharchi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = cub3D
 
 LIBFT = ./libft/libft.a
 
-CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast
+CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast 
 RM = rm -f
 
 SRC = main.c get_next_line.c get_next_line_utils.c my_split.c parsing_color.c parsing_map.c  parsing_texture.c parsing_utils.c init_function.c \
@@ -23,7 +23,7 @@ SRC = main.c get_next_line.c get_next_line_utils.c my_split.c parsing_color.c pa
 		raycasting_utils.c get_ray.c utils.c \
 
 OBJ = $(SRC:%.c=%.o)
-LIBMLX := ../MLX42
+LIBMLX := /Users/saharchi/Desktop/MLX42
 LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 all: $(NAME)

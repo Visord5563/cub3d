@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/31 23:23:58 by relamine         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:18:31 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 #include <string.h>
 #include <limits.h>
 #include "libft/libft.h"
-#include "../MLX42/include/MLX42/MLX42.h"
+#include "/Users/saharchi/Desktop/MLX42/include/MLX42/MLX42.h"
 
 #define BUFFER_SIZE 145
 
-#define WIDTH 800
-#define HEIGHT 800
+#define WIDTH 1200
+#define HEIGHT 1000
 #define FOV 60
 #define TILE_SIZE 30
 
@@ -133,15 +133,12 @@ typedef struct s_map
 	mlx_image_t		**player_img;
 	double			p_sz;
 	int				i;
+	int				m;
 }	t_map;
 
 char			*get_next_line(int fd);
-char			*ft_strjoin(char const *s1, char const *s2);
-size_t			ft_strlen(const char *s);
-char			*ft_strdup(const char *s1);
 int				ft_strchr2( char *s);
 char			**my_split(char const *s, char *c);
-int				ft_strcmp(const char *s1, const char *s2);
 void			ft_free(char **str);
 int				parsing_color(char *line, t_map *map, int *counter);
 int				process_map_lines(t_map *p_map,
@@ -149,7 +146,6 @@ int				process_map_lines(t_map *p_map,
 int				parsing_texture(char *line, t_map *map, int *counter);
 void			check_newline(char *map_oned, t_map *map);
 int				ft_count(char **str);
-int				is_texture_valid(t_map *map);
 int				skip_line_empty(char *line);
 char			*skip_space(char *line);
 void			init_map(t_map **p_map);
@@ -170,7 +166,6 @@ mlx_texture_t	*ft_whiche_texture( mlx_texture_t *texture[5],
 					double ray_angle, int side);
 void			key_release(t_map *p_map);
 void			close_win(void *param);
-int				hit_wall(t_map *p_map, double x, double y, int key_use);
 void			draw_ray_with_angle(float x0, float y0, t_map *p_map);
 void			free_map_textures(t_map *map);
 int				is_texture_valid(t_map *map);
@@ -178,9 +173,8 @@ mlx_image_t		**generating_frames(t_map *map, char *path, int frames);
 int				check_player_f(t_map *p_map);
 void			cursorfunc(double xpos, double ypos, void *param);
 void			exec(void *param);
-
 void			get_wall(double distance, double *wall_height,
-	double *wall_top, double *wall_bottom);
+					double *wall_top, double *wall_bottom);
 int				hit_wall(t_map *p_map, double x, double y, int key_use);
 double			get_horizontal(t_map *p_map, double ray_angle);
 double			get_vertical(t_map *p_map, double ray_angle);
@@ -198,3 +192,5 @@ int				check_space(char **map, int i, int j);
 int				check_player(char map);
 int				valid_element(char map, t_map *p_map);
 void			get_width_height(t_map *p_map);
+int				ft_mouse(mlx_key_data_t keydata, t_map *p_map);
+char			*get_path(char *path, int i);

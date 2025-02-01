@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:56:43 by saharchi          #+#    #+#             */
-/*   Updated: 2024/09/20 11:28:49 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:22:34 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		i = len;
 	s1 = malloc(sizeof(char) * (i + 1));
 	if (!s1)
-		exit(1);
+		return (NULL);
 	j = 0;
 	while (j < i)
 	{

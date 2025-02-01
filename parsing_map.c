@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:47:41 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/31 23:16:20 by relamine         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:32:15 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	parse_map(t_map *p_map)
 	while (p_map->map[i])
 	{
 		check = ft_strtrim(p_map->map[i], " \t\v\f\r\n");
-		if (check[0] != '1' || check[ft_strlen(check) - 1] != '1')
+		if (!check || check[0] != '1' || check[ft_strlen(check) - 1] != '1')
 		{
 			free(check);
 			error(p_map);

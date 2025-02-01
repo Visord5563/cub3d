@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 10:09:38 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/19 13:02:38 by relamine         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:37:49 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ void	append_line_to_map(char **map_oned,
 	if (!(*map_oned))
 	{
 		free(*line);
-		free_map(p_map);
-		printf("Error\n");
-		exit(1);
+		error(p_map);
 	}
 	free(*line);
 	*line = get_next_line(p_map->fd);

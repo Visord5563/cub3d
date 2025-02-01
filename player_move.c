@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:55:56 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/31 22:48:11 by relamine         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:16:51 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	check_key(mlx_key_data_t keydata, t_map *p_map)
 		p_map->player.turn_dir = 1;
 	else if (keydata.key == MLX_KEY_ESCAPE)
 		close_win(p_map);
+	else if (ft_mouse(keydata, p_map))
+		return (0);
 	else
 		return (0);
 	return (1);
@@ -105,7 +107,6 @@ void	keyfunc(mlx_key_data_t keydata, void *param)
 
 void	move_player(t_map *p_map)
 {
-	mlx_cursor_hook(p_map->mlx, cursorfunc, p_map);
 	mlx_key_hook(p_map->mlx, keyfunc, p_map);
 	mlx_close_hook(p_map->mlx, close_win, p_map);
 	mlx_loop_hook(p_map->mlx, exec, p_map);

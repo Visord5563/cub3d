@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:10:05 by saharchi          #+#    #+#             */
-/*   Updated: 2024/09/20 11:28:28 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:48:52 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	nstr = (char *)malloc(sizeof(char) * len);
 	if (!nstr)
-		exit(1);
+		return (NULL);
 	ft_strlcpy(nstr, s1, ft_strlen(s1) + 1);
 	ft_strlcat(nstr, s2, len);
 	free((void *)s1);

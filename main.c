@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:37 by saharchi          #+#    #+#             */
-/*   Updated: 2025/01/31 23:15:59 by relamine         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:14:02 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,7 @@ char	**resize_map(t_map *p_map)
 int	main(int argc, char **argv)
 {
 	t_map	*p_map;
-	int		status;
 
-	status = 0;
 	init_map(&p_map);
 	if (argc != 2 || !ft_strchr(argv[1], '.')
 		|| !check_namnf(p_map, argv[1]))

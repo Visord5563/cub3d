@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:32:06 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/31 21:27:10 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:16:26 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	load_tex(t_map *map, mlx_image_t **new, char *tx_path, int i)
 mlx_image_t	**generating_frames(t_map *map, char *path, int frames)
 {
 	mlx_image_t		**new;
-	char			*tmp;
 	char			*tx_path;
 	int				i;
 
@@ -75,10 +74,14 @@ mlx_image_t	**generating_frames(t_map *map, char *path, int frames)
 		return (NULL);
 	while (i < frames)
 	{
-		tmp = ft_itoa(i + 1);
-		tx_path = ft_strjoin(ft_strjoin(ft_strdup(path), tmp), ".png");
+		tx_path = get_path(path, i);
+		if (!tx_path)
+		{
+			free(new);
+			free(path);
+			error(map);
+		}
 		load_tex(map, new, tx_path, i);
-		free(tmp);
 		free(tx_path);
 		i++;
 	}

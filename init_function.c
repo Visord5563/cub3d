@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 12:24:37 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/29 23:19:14 by relamine         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:19:02 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	init_map(t_map **p_map)
 	map->player.img = NULL;
 	map->mlx = NULL;
 	map->fd = -1;
-	map->i = 0;
+	(1) && (map->i = 0, map->m = 0);
 	init_textures(map);
 	*p_map = map;
 }
@@ -79,4 +79,38 @@ void	get_posplayer(t_map *p_map, int y, int x)
 	p_map->door.is_open = 0;
 	p_map->door.tmp_is_open = 0;
 	p_map->door.inside_door = 0;
+}
+
+char	*get_path(char *path, int i)
+{
+	char	*tmp;
+	char	*tx_path;
+
+	tmp = ft_itoa(i + 1);
+	if (!tmp)
+		return (NULL);
+	tx_path = ft_strjoin(ft_strjoin(ft_strdup(path), tmp), ".png");
+	if (!tx_path)
+	{
+		free(tmp);
+		return (NULL);
+	}
+	free(tmp);
+	return (tx_path);
+}
+
+int	ft_mouse(mlx_key_data_t keydata, t_map *p_map)
+{
+	if (keydata.key == MLX_KEY_M && p_map->m == 0)
+	{
+		p_map->m = 1;
+		mlx_set_cursor_mode(p_map->mlx, MLX_MOUSE_HIDDEN);
+		mlx_cursor_hook(p_map->mlx, cursorfunc, p_map);
+	}
+	else if (keydata.key == MLX_KEY_M && p_map->m == 1)
+	{
+		p_map->m = 0;
+		mlx_set_cursor_mode(p_map->mlx, MLX_MOUSE_NORMAL);
+	}
+	return (1);
 }

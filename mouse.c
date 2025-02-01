@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: relamine <relamine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 21:50:28 by relamine          #+#    #+#             */
-/*   Updated: 2025/01/31 22:48:59 by relamine         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:11:49 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	cursorfunc(double xpos, double ypos, void *param)
 	static double	prev_xpos;
 
 	p_map = (t_map *)param;
-	mlx_set_cursor_mode(p_map->mlx, MLX_MOUSE_DISABLED);
+	if (p_map->m == 0)
+		return ;
 	if (xpos < 0 || ypos < 0 || xpos > WIDTH || ypos > HEIGHT)
 	{
 		prev_xpos = WIDTH / 2;
@@ -74,5 +75,5 @@ void	draw_floor_ceiling(t_map *p_map, int i, int y)
 	}
 	else
 		mlx_put_pixel(p_map->map_img, i, y,
-			get_rgba(p_map->c.r, p_map->c.g, p_map->c.b, 80));
+			get_rgba(p_map->c.r, p_map->c.g, p_map->c.b, alpha));
 }

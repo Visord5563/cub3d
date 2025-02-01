@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 23:48:45 by saharchi          #+#    #+#             */
-/*   Updated: 2024/09/20 11:28:14 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:48:04 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strdup(const char *s1)
 	i = ft_strlen(s1);
 	s = (char *)malloc(sizeof(char) * i + 1);
 	if (!s)
-		exit(1);
+		return (0);
 	j = 0;
 	while (j < i)
 	{
