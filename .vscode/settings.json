@@ -75,7 +75,8 @@
     "unordered_map": "c",
     "utility": "c",
     "vector": "c",
-    "mlx42.h": "c"
+    "mlx42.h": "c",
+    "libft.h": "c"
   },
   "cmake.sourceDirectory": "/Users/relamine/Desktop/cub3d/MLX42"
 }

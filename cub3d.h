@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 15:30:32 by saharchi          #+#    #+#             */
-/*   Updated: 2025/02/01 23:18:31 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/02/02 01:01:14 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ typedef struct s_map
 	double			p_sz;
 	int				i;
 	int				m;
+	double			prev_xpos;
 }	t_map;
 
 char			*get_next_line(int fd);

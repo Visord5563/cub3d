@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 12:24:37 by relamine          #+#    #+#             */
-/*   Updated: 2025/02/01 23:19:02 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/02/02 01:11:14 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	init_map(t_map **p_map)
 	map->minimap.img = NULL;
 	map->player.img = NULL;
 	map->mlx = NULL;
-	map->fd = -1;
+	(1) && (map->fd = -1, map->prev_xpos = 0);
 	(1) && (map->i = 0, map->m = 0);
 	init_textures(map);
 	*p_map = map;
@@ -101,9 +101,16 @@ char	*get_path(char *path, int i)
 
 int	ft_mouse(mlx_key_data_t keydata, t_map *p_map)
 {
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
 	if (keydata.key == MLX_KEY_M && p_map->m == 0)
 	{
 		p_map->m = 1;
+		mlx_get_mouse_pos(p_map->mlx, &x, &y);
+		p_map->prev_xpos = x;
 		mlx_set_cursor_mode(p_map->mlx, MLX_MOUSE_HIDDEN);
 		mlx_cursor_hook(p_map->mlx, cursorfunc, p_map);
 	}

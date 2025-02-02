@@ -6,7 +6,7 @@
 /*   By: saharchi <saharchi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 21:50:28 by relamine          #+#    #+#             */
-/*   Updated: 2025/02/01 23:11:49 by saharchi         ###   ########.fr       */
+/*   Updated: 2025/02/02 01:08:56 by saharchi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,22 @@ void	exec(void *param)
 void	cursorfunc(double xpos, double ypos, void *param)
 {
 	t_map			*p_map;
-	static double	prev_xpos;
 
 	p_map = (t_map *)param;
 	if (p_map->m == 0)
 		return ;
 	if (xpos < 0 || ypos < 0 || xpos > WIDTH || ypos > HEIGHT)
 	{
-		prev_xpos = WIDTH / 2;
+		p_map->prev_xpos = WIDTH / 2;
 		mlx_set_mouse_pos(p_map->mlx, WIDTH / 2, HEIGHT / 2);
 		return ;
 	}
-	p_map->player.rot_angle += (xpos - prev_xpos) * 0.003;
+	p_map->player.rot_angle += (xpos - p_map->prev_xpos) * 0.003;
 	if (p_map->player.rot_angle >= 2 * M_PI)
 		p_map->player.rot_angle -= 2 * M_PI;
 	if (p_map->player.rot_angle < 0)
 		p_map->player.rot_angle += 2 * M_PI;
-	prev_xpos = WIDTH / 2;
+	p_map->prev_xpos = WIDTH / 2;
 	mlx_set_mouse_pos(p_map->mlx, WIDTH / 2, HEIGHT / 2);
 }
 
